@@ -1,0 +1,14 @@
+extends default
+
+block content
+
+    //  submit new plant functionality
+    h3 Create new Plant
+    form(method='POST', action="http://localhost:3001/api/plants")
+        input(type='text', name='plantName')
+        input(type='submit')
+
+    h3 Delete Plant
+    form(method='DELETE', action="http://localhost:3001/api/plants")
+        input(type='text', name='plantName')
+        input(type='submit')

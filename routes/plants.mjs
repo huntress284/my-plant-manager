@@ -1,0 +1,32 @@
+import express from 'express';
+
+import { list_plants, create_plant, delete_plant} from "../controllers/plants.mjs";
+
+import { app } from "../app.mjs";
+
+const router = express.Router();
+
+router.use(express.json());
+router.use(express.urlencoded({ extended: false }));
+
+
+router.route('/plants')
+	.get(async (req, res) => {
+		const data = await list_plants();
+		res.status(200).json(data);
+	})
+	.post(async (req, res) => {
+		console.log("To create plant: " + req.body.plantName);
+
+		const data = await create_plant(req.body.plantName);
+		res.status(201).end();
+	})
+	.delete(async (req, res) => {
+		console.log("To delete plant:" + req.body.plantName);
+
+		const data = await delete_plant(req.body.plantName);
+		res.status(204).end();
+	});
+
+
+export { router as plants }
