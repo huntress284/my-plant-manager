@@ -1,7 +1,6 @@
 import express from 'express';
 
 import { plants } from './plants.mjs';
-import {app} from "../app.mjs";
 
 const router = express.Router();
 

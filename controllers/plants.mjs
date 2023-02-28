@@ -20,17 +20,20 @@ export async function list_plants() {
     }
 }
 
-export async function create_plant(plantName) {
-
-        const session = await mysqlx.getSession(config);
-        await session.sql('CALL create_plant(?);').bind(plantName).execute();
-        session.close();
-}
-
-export async function delete_plant(plantName){
+export async function create_plant(plantId, plantName) {
 
     const session = await mysqlx.getSession(config);
-    await session.sql('CALL delete_plant(?);').bind(plantName).execute();
+    console.log("plant id: " + plantId);
+    console.log("plant name: " + plantName);
+    await session.sql('CALL create_plant(?,?);').bind(plantId, plantName).execute();
+    session.close();
+
+}
+
+export async function delete_plant(plantName) {
+
+    const session = await mysqlx.getSession(config);
+    await session.sql('CALL delete_plant(?,?);').bind(plantId, plantName).execute();
     session.close();
 
 }
