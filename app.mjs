@@ -1,8 +1,10 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import cors from 'cors';
 const app = express();
 
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -32,8 +34,5 @@ app.get('/', async (req, res) => {
 app.get('/nursery', async (req, res) => {
     res.status(200).render('nursery');
 });
-
-
-
 
 export { app }
