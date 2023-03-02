@@ -13,12 +13,11 @@ async function get_info(x) {
 
     const response = await fetch(url, options);
 
-    if (response.status != 200){
+    if (!response.ok){
+        console.log(response.status);
+        document.getElementById("overlay").style.display = "block";
 
-        alert("Not enough money! :( ");
     }
-
-    console.log(response.status);
 
     const json = await response.json();
 
