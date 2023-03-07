@@ -9,7 +9,6 @@ router.use(express.urlencoded({ extended: false }));
 
 router.route('/plants')
 	.get(async (req, res) => {
-
 		const data = await list_plants();
 		res.status(200).json(data);
 	})
@@ -19,8 +18,16 @@ router.route('/plants')
 		res.status(201).end();
 	})
 	.delete(async (req, res) => {
-		const data = await delete_plant(req.body.plantId, req.body.plantName);
+		const data = await delete_plant(req.body.plantId);
 		res.status(204).end();
 	});
+
+// router.route('/plants/:plantId) to do something with specific plant
+router.route('/nursery')
+	.get(async (req, res) => {
+
+		res.status(200).json(data);
+	});
+
 
 export { router as plants }

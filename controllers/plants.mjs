@@ -30,10 +30,10 @@ export async function create_plant(plantId, plantName) {
 
 }
 
-export async function delete_plant(plantName) {
+export async function delete_plant(plantId) {
 
     const session = await mysqlx.getSession(config);
-    await session.sql('CALL delete_plant(?,?);').bind(plantId, plantName).execute();
+    await session.sql('CALL delete_plant(?);').bind(plantId).execute();
     session.close();
 
 }

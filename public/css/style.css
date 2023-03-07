@@ -1,5 +1,5 @@
 body{
-    background-color: #698375;
+    background-color: #c3defd;
 }
 
 .card{
@@ -9,6 +9,48 @@ body{
 nav{
 
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+#overlay{
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.window{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    background-color: #f2afcc;
+}
+
+#demo, #noneReturned{
+    font-size: 16px;
+}
+.information{
+    font-size: 14px;
+}
+
+.plantCards{
+    position: unset;
+    transform: none;
+    padding: 30%;
+}
+
+#plant{
+    width: 85%;
+    padding: 5px;
+    /*height: 75%;*/
 }
 
 
@@ -27,4 +69,342 @@ nav{
     color-stop(0.44, rgb(227, 226, 203)),
     color-stop(0.72, rgb(185, 197, 167)),
     color-stop(0.86, rgb(135, 157, 129)));
+}
+
+/* -------------------------- WINDOWS 98 THEME --------------------------*/
+
+:root {
+    /* Color */
+    --text-color: #222222;
+    --surface: #c0c0c0;
+    --button-highlight: #ffffff;
+    --button-face: #dfdfdf;
+    --button-shadow: #808080;
+    --window-frame: #0a0a0a;
+    --dialog-blue: #e283b7;
+    --dialog-blue-light: #d06ca0;
+    --dialog-gray: #808080;
+    --dialog-gray-light: #b5b5b5;
+    --link-blue: #0000ff;
+
+    /* Spacing */
+    --element-spacing: 8px;
+    --grouped-button-spacing: 4px;
+    --grouped-element-spacing: 6px;
+    --radio-width: 12px;
+    --checkbox-width: 13px;
+    --radio-label-spacing: 6px;
+    --range-track-height: 4px;
+    --range-spacing: 10px;
+
+    /* Borders */
+    --border-width: 1px;
+    --border-raised-outer: inset -1px -1px var(--window-frame),
+    inset 1px 1px var(--button-highlight);
+    --border-raised-inner: inset -2px -2px var(--button-shadow),
+    inset 2px 2px var(--button-face);
+    --border-sunken-outer: inset -1px -1px var(--button-highlight),
+    inset 1px 1px var(--window-frame);
+    --border-sunken-inner: inset -2px -2px var(--button-face),
+    inset 2px 2px var(--button-shadow);
+
+    /* Window borders flip button-face and button-highlight */
+    --border-window-outer: inset -1px -1px var(--window-frame),
+    inset 1px 1px var(--button-face);
+    --border-window-inner: inset -2px -2px var(--button-shadow),
+    inset 2px 2px var(--button-highlight);
+
+    /* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
+    --border-field: inset -1px -1px var(--button-highlight),
+    inset 1px 1px var(--button-shadow), inset -2px -2px var(--button-face),
+    inset 2px 2px var(--window-frame);
+}
+
+@font-face {
+    font-family: "Pixelated MS Sans Serif";
+    src: url("fonts/converted/ms_sans_serif.woff") format("woff");
+    src: url("fonts/converted/ms_sans_serif.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: Arial;
+    font-size: 12px;
+    color: var(--text-color);
+}
+
+
+/* I PUT THE BODY IN HERE MIGHT WANT TO SEE IF I LIKE IT OR NOT*/
+button,
+label,
+.window,
+.title-bar, body {
+    font-family: "Pixelated MS Sans Serif", Arial;
+    -webkit-font-smoothing: none;
+    font-size: 11px;
+}
+
+button{
+    background: white;
+}
+
+.window {
+    box-shadow: var(--border-window-outer), var(--border-window-inner);
+    background: var(--surface);
+    padding: 3px;
+    margin: 1em;
+    background-color: #f2afcc;
+}
+
+
+.title-bar {
+    background: linear-gradient(
+            90deg,
+            var(--dialog-blue),
+            var(--dialog-blue-light)
+    );
+    padding: 3px 2px 3px 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-bar.inactive {
+    background: linear-gradient(
+            90deg,
+            var(--dialog-gray),
+            var(--dialog-gray-light)
+    );
+}
+
+.title-bar-text {
+    font-weight: bold;
+    color: white;
+    letter-spacing: 0;
+    margin-right: 24px;
+}
+
+.title-bar-controls {
+    display: flex;
+}
+
+.title-bar-controls button {
+    padding: 0;
+    display: block;
+    min-width: 16px;
+    min-height: 14px;
+}
+
+.title-bar-controls button:active {
+    padding: 0;
+}
+
+.title-bar-controls button:focus {
+    outline: none;
+}
+
+.title-bar-controls button[aria-label="Minimize"] {
+    background-image: svg-load("./icon/minimize.svg");
+    background-repeat: no-repeat;
+    background-position: bottom 3px left 4px;
+}
+
+.title-bar-controls button[aria-label="Maximize"] {
+    background-image: svg-load("./icon/maximize.svg");
+    background-repeat: no-repeat;
+    background-position: top 2px left 3px;
+}
+
+.title-bar-controls button[aria-label="Restore"] {
+    background-image: svg-load("./icon/restore.svg");
+    background-repeat: no-repeat;
+    background-position: top 2px left 3px;
+}
+
+.title-bar-controls button[aria-label="Help"] {
+    background-image: svg-load("./icon/help.svg");
+    background-repeat: no-repeat;
+    background-position: top 2px left 5px;
+}
+
+.title-bar-controls button[aria-label="Close"] {
+    margin-left: 2px;
+    background-image: svg-load("./icon/close.svg");
+    background-repeat: no-repeat;
+    background-position: top 3px left 4px;
+}
+
+.window-body {
+    margin: var(--element-spacing);
+}
+
+.field-row {
+    display: flex;
+    align-items: center;
+}
+
+[class^="field-row"] + [class^="field-row"] {
+    margin-top: var(--grouped-element-spacing);
+}
+
+.field-row > * + * {
+    margin-left: var(--grouped-element-spacing);
+}
+
+.field-row-stacked {
+    display: flex;
+    flex-direction: column;
+}
+
+.field-row-stacked * + * {
+    margin-top: var(--grouped-element-spacing);
+}
+
+label {
+    display: inline-flex;
+    align-items: center;
+}
+
+code,
+code * {
+    font-family: monospace;
+}
+
+::-webkit-scrollbar {
+    width: 16px;
+}
+::-webkit-scrollbar:horizontal {
+    height: 17px;
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--button-face);
+}
+
+::-webkit-scrollbar-track {
+    background-image: svg-load("./icon/scrollbar-background.svg");
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--button-face);
+    box-shadow: var(--border-raised-outer), var(--border-raised-inner);
+}
+
+::-webkit-scrollbar-button:horizontal:start:decrement,
+::-webkit-scrollbar-button:horizontal:end:increment,
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment {
+    display: block;
+}
+
+.sunken-panel {
+    box-sizing: border-box;
+    border: 2px groove transparent;
+    border-image: svg-load("./icon/sunken-panel-border.svg") 2;
+    overflow: auto;
+    background-color: #fff;
+}
+
+table {
+    border-collapse: collapse;
+    position: relative;
+    text-align: left;
+    white-space: nowrap;
+    background-color: #fff;
+}
+
+
+/* my clouds */
+
+body {
+    overflow-x: hidden;
+}
+
+#clouds{
+    z-index: -100;
+    padding: 100px 0;
+    position: absolute;
+}
+.cloud {
+    width: 200px; height: 60px;
+    background: #fff;
+    border-radius: 200px;
+    -moz-border-radius: 200px;
+    -webkit-border-radius: 200px;
+    position: relative;
+}
+.cloud:before, .cloud:after {
+    content: '';
+    position: absolute;
+    background: #fff;
+    width: 100px; height: 80px;
+    position: absolute; top: -15px; left: 10px;
+    border-radius: 100px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -webkit-transform: rotate(30deg);
+    transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+}
+.cloud:after {
+    width: 120px; height: 120px;
+    top: -55px; left: auto; right: 15px;
+}
+.x1 {
+    -webkit-animation: moveclouds 15s linear infinite;
+    -moz-animation: moveclouds 15s linear infinite;
+    -o-animation: moveclouds 15s linear infinite;
+}
+.x2 {
+    left: 200px;
+    -webkit-transform: scale(0.6);
+    -moz-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: 0.6;
+    -webkit-animation: moveclouds 25s linear infinite;
+    -moz-animation: moveclouds 25s linear infinite;
+    -o-animation: moveclouds 25s linear infinite;
+}
+.x3 {
+    left: -250px; top: -200px;
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0.8;
+    -webkit-animation: moveclouds 20s linear infinite;
+    -moz-animation: moveclouds 20s linear infinite;
+    -o-animation: moveclouds 20s linear infinite;
+}
+.x4 {
+    left: 470px; top: -250px;
+    -webkit-transform: scale(0.75);
+    -moz-transform: scale(0.75);
+    transform: scale(0.75);
+    opacity: 0.75;
+    -webkit-animation: moveclouds 18s linear infinite;
+    -moz-animation: moveclouds 18s linear infinite;
+    -o-animation: moveclouds 18s linear infinite;
+}
+.x5 {
+    left: -150px; top: -150px;
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0.8;
+    -webkit-animation: moveclouds 20s linear infinite;
+    -moz-animation: moveclouds 20s linear infinite;
+    -o-animation: moveclouds 20s linear infinite;
+}
+@-webkit-keyframes moveclouds {
+    0% {margin-left: 1000px;}
+    100% {margin-left: -1000px;}
+}
+@-moz-keyframes moveclouds {
+    0% {margin-left: 1000px;}
+    100% {margin-left: -1000px;}
+}
+@-o-keyframes moveclouds {
+    0% {margin-left: 1000px;}
+    100% {margin-left: -1000px;}
 }
