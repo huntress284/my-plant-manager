@@ -12,10 +12,6 @@ block content
 
     button(data-bs-toggle='modal', data-bs-target='#exampleModal', onclick="addPlant()") Create new plant
 
-    form.p-4(action='/profile', method='post', enctype='multipart/form-data')
-        input(type='file', name='avatar')
-
-
     // Modal
     #exampleModal.modal.fade(tabindex='-1', aria-labelledby='exampleModalLabel', aria-hidden='true')
         .modal-dialog
@@ -71,6 +67,34 @@ block content
     .row.row-cols-2.row-cols-md-4.g-4
         each plant of plants
             .d-flex.justify-content-evenly
+                //.window.plantCards(style='width: 350px')
+                //    .title-bar
+                //        .title-bar-text= plant[1]
+                //        .title-bar-controls
+                //            button(aria-label='Minimize')
+                //            // make bigger on click?
+                //            button(aria-label='Maximize')
+                //            button(aria-label='Close')
+                //    .window-body
+                //        img#plant(src='/static/images/' + plant[1] + '.jpg', value=`${plant[0]}` alt='No picture yet!')
+                //        hr
+                //        .information#info(blockID=`${plant[0]}` style='display: none;')
+                //            #commonName(commonName=`${plant[0]}`)
+                //                p.name Common Name
+                //            #scientific(scientific=`${plant[0]}`)
+                //                p.name Scientific Name
+                //            #sunlight(sunlight=`${plant[0]}`)
+                //                p.name Sunlight
+                //            #watering(watering=`${plant[0]}`)
+                //                p.name Watering
+                //            #propagation(propagation=`${plant[0]}`)
+                //                p.name Propagation
+                //        //
+                //        section.field-row(style='justify-content: flex-end')
+                //            button(onclick=`get_info(${plant[0]})`) More Info
+                //            button(onclick= `removePlant(${plant[0]})`) Delete Plant
+                        //.overlay2.top-0
+                        //    | whaaaaaat
                 .window.plantCards(style='width: 350px')
                     .title-bar
                         .title-bar-text= plant[1]
@@ -80,18 +104,30 @@ block content
                             button(aria-label='Maximize')
                             button(aria-label='Close')
                     .window-body
-                        img#plant(src='/static/images/' + plant[1] + '.jpg', value=`${plant[0]}` alt='No picture yet!')
+                        .flip-card
+                            .flip-card-inner
+                                .flip-card-front
+                                    img#plant(src='/static/images/' + plant[1] + '.jpg', value=`${plant[0]}` alt='No picture yet!')
+                                .flip-card-back
+                                    .information#info(blockID=`${plant[0]}` style='display: none;')
+                                        #commonName(commonName=`${plant[0]}`)
+                                            p.name Common Name
+                                        #scientific(scientific=`${plant[0]}`)
+                                            p.name Scientific Name
+                                        #sunlight(sunlight=`${plant[0]}`)
+                                            p.name Sunlight
+                                        #watering(watering=`${plant[0]}`)
+                                            p.name Watering
+                                        #propagation(propagation=`${plant[0]}`)
+                                            p.name Propagation
                         hr
-                        .information#info
-                            #commonName(commonName=`${plant[0]}`)
-                            #scientific(scientific=`${plant[0]}`)
-                            #sunlight(sunlight=`${plant[0]}`)
-                            #watering(watering=`${plant[0]}`)
-                            #propagation(propagation=`${plant[0]}`)
 
                         section.field-row(style='justify-content: flex-end')
                             button(onclick=`get_info(${plant[0]})`) More Info
                             button(onclick= `removePlant(${plant[0]})`) Delete Plant
+
+
+
 
 
 

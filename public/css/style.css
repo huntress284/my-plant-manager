@@ -1,16 +1,20 @@
-body{
+body {
     background-color: #c3defd;
 }
 
-.card{
+.card {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-nav{
+nav {
 
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
-#overlay{
+button{
+    white-space: nowrap;
+}
+
+#overlay {
     position: fixed;
     display: none;
     width: 100%;
@@ -19,49 +23,58 @@ nav{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
     cursor: pointer;
 }
+/*.overlay2 {*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background-color: rgba(0, 0, 0, 0.5);*/
+/*}*/
 
-.window{
+.window-body{
+    position: relative;
+}
+
+.window {
     position: absolute;
     top: 50%;
     left: 50%;
     font-size: 50px;
-    transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     background-color: #f2afcc;
 }
 
-#demo, #noneReturned{
+#demo, #noneReturned {
     font-size: 16px;
 }
-.information{
+
+.information {
     font-size: 14px;
 }
 
-.plantCards{
+.plantCards {
     position: unset;
     transform: none;
     padding: 30%;
 }
 
-#plant{
+#plant {
     width: 85%;
-    padding: 5px;
-    /*height: 75%;*/
+    border: 5px solid white;
+    box-shadow: rgba(240, 46, 170, 0.4) -5px 5px
 }
 
 
-::-webkit-scrollbar
-{
+::-webkit-scrollbar {
     width: 10px;
     background-color: #F5F5F5;
 }
 
-::-webkit-scrollbar-thumb
-{
+::-webkit-scrollbar-thumb {
     /*border-radius: 10px;*/
     background-image: -webkit-gradient(linear,
     left bottom,
@@ -145,7 +158,7 @@ label,
     font-size: 11px;
 }
 
-button{
+button {
     background: white;
 }
 
@@ -274,6 +287,7 @@ code * {
 ::-webkit-scrollbar {
     width: 16px;
 }
+
 ::-webkit-scrollbar:horizontal {
     height: 17px;
 }
@@ -316,18 +330,17 @@ table {
 
 
 /* my clouds */
-
 body {
     overflow-x: hidden;
 }
-
-#clouds{
+#clouds {
     z-index: -100;
     padding: 100px 0;
     position: absolute;
 }
 .cloud {
-    width: 200px; height: 60px;
+    width: 200px;
+    height: 60px;
     background: #fff;
     border-radius: 200px;
     -moz-border-radius: 200px;
@@ -338,8 +351,11 @@ body {
     content: '';
     position: absolute;
     background: #fff;
-    width: 100px; height: 80px;
-    position: absolute; top: -15px; left: 10px;
+    width: 100px;
+    height: 80px;
+    position: absolute;
+    top: -15px;
+    left: 10px;
     border-radius: 100px;
     -moz-border-radius: 100px;
     -webkit-border-radius: 100px;
@@ -348,8 +364,11 @@ body {
     -moz-transform: rotate(30deg);
 }
 .cloud:after {
-    width: 120px; height: 120px;
-    top: -55px; left: auto; right: 15px;
+    width: 120px;
+    height: 120px;
+    top: -55px;
+    left: auto;
+    right: 15px;
 }
 .x1 {
     -webkit-animation: moveclouds 15s linear infinite;
@@ -367,7 +386,8 @@ body {
     -o-animation: moveclouds 25s linear infinite;
 }
 .x3 {
-    left: -250px; top: -200px;
+    left: -250px;
+    top: -200px;
     -webkit-transform: scale(0.8);
     -moz-transform: scale(0.8);
     transform: scale(0.8);
@@ -377,7 +397,8 @@ body {
     -o-animation: moveclouds 20s linear infinite;
 }
 .x4 {
-    left: 470px; top: -250px;
+    left: 470px;
+    top: -250px;
     -webkit-transform: scale(0.75);
     -moz-transform: scale(0.75);
     transform: scale(0.75);
@@ -387,7 +408,8 @@ body {
     -o-animation: moveclouds 18s linear infinite;
 }
 .x5 {
-    left: -150px; top: -150px;
+    left: -150px;
+    top: -150px;
     -webkit-transform: scale(0.8);
     -moz-transform: scale(0.8);
     transform: scale(0.8);
@@ -397,14 +419,94 @@ body {
     -o-animation: moveclouds 20s linear infinite;
 }
 @-webkit-keyframes moveclouds {
-    0% {margin-left: 1000px;}
-    100% {margin-left: -1000px;}
+    0% {
+        margin-left: 1000px;
+    }
+    100% {
+        margin-left: -1000px;
+    }
 }
 @-moz-keyframes moveclouds {
-    0% {margin-left: 1000px;}
-    100% {margin-left: -1000px;}
+    0% {
+        margin-left: 1000px;
+    }
+    100% {
+        margin-left: -1000px;
+    }
 }
 @-o-keyframes moveclouds {
-    0% {margin-left: 1000px;}
-    100% {margin-left: -1000px;}
+    0% {
+        margin-left: 1000px;
+    }
+    100% {
+        margin-left: -1000px;
+    }
 }
+
+.name {
+    white-space: nowrap;
+    padding: 0px;
+    margin: 10px;
+    background-color: #c976aa;
+    box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 12px;
+    outline: none;
+    outline: 0;
+    text-align: center;
+    transition: transform 150ms, box-shadow 150ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.name:hover {
+    box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+    transform: translateY(-2px);
+}
+
+
+.flip-card {
+    background-color: transparent;
+    width: 300px;
+    height: 330px;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+    color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+    background-color: transparent;
+    color: white;
+    transform: rotateY(180deg);
+}
+
+
