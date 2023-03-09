@@ -1,3 +1,19 @@
+async function testPic(){
+
+    import fs from 'fs';
+    const FILE_TO_READ  = 'avatar.png';
+    const FILE_TO_WRITE = 'avatar_copy.png';
+
+    const readStream  =
+        fs.createReadStream(new URL(FILE_TO_READ, import.meta.url));
+    const writeStream =
+        fs.createWriteStream(new URL(FILE_TO_WRITE, import.meta.url));
+
+    readStream.pipe(writeStream);
+
+}
+
+
 async function get_info(x) {
     console.clear();
     x.toString();
@@ -22,56 +38,52 @@ async function get_info(x) {
     const watering = json.watering;
     const sunlight = json.sunlight;
 
-    document.querySelector(`[commonName= "${x}"]`).innerText = "Common Name: " + common_name;
-    document.querySelector(`[scientific= "${x}"]`).innerText = "Scientific Name: " + scientific_name;
-    document.querySelector(`[sunlight= "${x}"]`).innerText = "Sunlight: " + sunlight;
-    document.querySelector(`[watering= "${x}"]`).innerText = "Watering: " + watering;
-    document.querySelector(`[propagation= "${x}"]`).innerText = "Propagation Methods: " + propagation;
+
+    document.querySelector(`[blockID= "${x}"]`).style.display = "block";
+    // const hmm = document.querySelector(`[windowBody= "${x}"] [blockID= "${x}"]`);
+    // hmm.style.display = "block";
+
+    document.querySelector(`[commonName= "${x}"]`).append(common_name);
+    document.querySelector(`[scientific= "${x}"]`).append(scientific_name);
+    document.querySelector(`[sunlight= "${x}"]`).append(sunlight);
+    document.querySelector(`[watering= "${x}"]`).append(watering);
+    document.querySelector(`[propagation= "${x}"]`).append(propagation);
 }
 
 async function addPlant() {
-
     let plantID = document.getElementById("plantId");
     let plantName = document.getElementById("plantInput");
-    // plantName.toString();
-
     let parsed = parseInt(plantID.value);
     let nameParse = toString(plantName.value);
-    //
-    if (plantID.value == "" || plantName.value == "") {
-        alert("Ensure you input a value in both fields!");
-    } else {
-        // alert("This form has been successfully submitted!");
+    // if (plantID.value == "" || plantName.value == "") {
+    //     alert("Ensure you input a value in both fields!");
+    // } else {
         console.log(
             `plantID : ${plantID.value}, name: ${plantName.value}`
         );
-
         console.log(typeof nameParse);
-
-            const url = 'http://localhost:3001/api/plants';
-            const options = {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    plantId: parsed,
-                    plantName: plantName.value
-                })
-            };
-            const response = await fetch(url, options);
-            if (response.ok) {
-                // console.log("succesful plant load");
-                location.reload();
-            }
-    }
+        const url = 'http://localhost:3001/api/plants';
+        const options = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                plantId: parsed,
+                plantName: plantName.value
+            })
+        };
+        const response = await fetch(url, options);
+        if (response.ok) {
+            // console.log("succesful plant load");
+            location.reload();
+        }
+    // }
 }
 
 async function removePlant(id) {
-
     console.log("Plant ID to delete: " + id);
     const url = 'http://localhost:3001/api/plants';
-
     const options = {
         method: 'DELETE',
         headers: {

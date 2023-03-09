@@ -2,9 +2,8 @@ import express from 'express';
 import path from 'path';
 import {fileURLToPath} from 'url';
 import cors from 'cors';
-import multer from 'multer';
+import fs from 'fs';
 
-const upload = multer({dest: '../uploads'});
 const app = express();
 
 app.use(cors());
@@ -17,17 +16,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
-
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-
-        // Uploads is the Upload_folder_name
-        cb(null, "uploads")
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + "-" + Date.now()+".jpg")
-    }
-})
 
 
 app.get('/', async (req, res) => {
@@ -48,6 +36,7 @@ app.get('/', async (req, res) => {
 app.get('/nursery', async (req, res) => {
     res.status(200).render('nursery');
 });
+
 
 
 export {app}
