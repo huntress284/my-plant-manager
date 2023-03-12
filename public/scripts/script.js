@@ -1,23 +1,6 @@
-async function testPic(){
-
-    import fs from 'fs';
-    const FILE_TO_READ  = 'avatar.png';
-    const FILE_TO_WRITE = 'avatar_copy.png';
-
-    const readStream  =
-        fs.createReadStream(new URL(FILE_TO_READ, import.meta.url));
-    const writeStream =
-        fs.createWriteStream(new URL(FILE_TO_WRITE, import.meta.url));
-
-    readStream.pipe(writeStream);
-
-}
-
-
 async function get_info(x) {
     console.clear();
     x.toString();
-    const val = x;
     // PLANT DETAILS
     const url = "https://perenual.com/api/species/details/" + x + "?key=sk-8k2463e99f604d8a438";
     const options = {
@@ -27,7 +10,6 @@ async function get_info(x) {
     if (!response.ok) {
         console.log(response.status);
         document.getElementById("overlay").style.display = "block";
-
     }
     const json = await response.json();
 
@@ -38,11 +20,9 @@ async function get_info(x) {
     const watering = json.watering;
     const sunlight = json.sunlight;
 
-
+    // Show element
     document.querySelector(`[blockID= "${x}"]`).style.display = "block";
-    // const hmm = document.querySelector(`[windowBody= "${x}"] [blockID= "${x}"]`);
-    // hmm.style.display = "block";
-
+    // Add details and show
     document.querySelector(`[commonName= "${x}"]`).append(common_name);
     document.querySelector(`[scientific= "${x}"]`).append(scientific_name);
     document.querySelector(`[sunlight= "${x}"]`).append(sunlight);
@@ -55,13 +35,16 @@ async function addPlant() {
     let plantName = document.getElementById("plantInput");
     let parsed = parseInt(plantID.value);
     let nameParse = toString(plantName.value);
-    // if (plantID.value == "" || plantName.value == "") {
-    //     alert("Ensure you input a value in both fields!");
-    // } else {
+
+    // Alert box
+    if (plantID.value == "" || plantName.value == "") {
+        alert("Ensure you input a value in both fields!");
+    } else {
         console.log(
             `plantID : ${plantID.value}, name: ${plantName.value}`
         );
         console.log(typeof nameParse);
+        // Adds plant to DB with ID and PlantName
         const url = 'http://localhost:3001/api/plants';
         const options = {
             method: 'POST',
@@ -75,10 +58,10 @@ async function addPlant() {
         };
         const response = await fetch(url, options);
         if (response.ok) {
-            // console.log("succesful plant load");
-            location.reload();
+            // Calls photo form
+            document.getElementById('form2').submit();
         }
-    // }
+    }
 }
 
 async function removePlant(id) {
