@@ -9,10 +9,6 @@ block content
         .cloud.x4
         .cloud.x5
 
-    form
-        input#pictureTest.form-control(type='file')
-        button.btn.btn-primary(onclick="testPic()") Submit Plant Photo
-
     button(data-bs-toggle='modal', data-bs-target='#exampleModal', onclick="addPlant()") Create new plant
 
     // Modal
@@ -23,26 +19,32 @@ block content
                     h1#exampleModalLabel.modal-title.fs-5 Modal title
                     button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
                 .modal-body
-                    form
+                    form#form1
                         .mb-3
-                            label.form-label(for='plantId') Plant Name
+                            label.form-label(for='plantId') Plant ID
                             input#plantId.form-control(type='text', aria-describedby='plantName', placeholder='Plant Name')
                         .mb-3
-                            label.form-label(for='plantInput') Plant ID
+                            label.form-label(for='plantInput') Plant Name
                             input#plantInput.form-control(type='text', placeholder='PlantID')
                         .input-group.mb-3
                             input#inputGroupFile01.form-control(type='file')
                         button.btn.btn-primary(type='submit') Submit Plant Photo
-
+                    form#form2(method='POST', action='/', enctype='multipart/form-data')
+                        div
+                            label name
+                            input(type='text', name='picname', required='')
+                        div
+                            label Upload profile picture
+                            input(type='file', name='profile-file', required='')
+                        div
+                            input(type='submit', value='Upload')
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
                     button.btn.btn-primary(type='button', onclick="addPlant()") Save changes
 
 
     h4#total
-
     #noneReturned
-
     ul#demo.p-4
 
     script.
@@ -66,44 +68,14 @@ block content
                     button(onclick="off()") OK
                     button Cancel
 
-    //h3 Plants in Database
     .row.row-cols-2.row-cols-md-4.g-4
         each plant of plants
             .d-flex.justify-content-evenly
-                //.window.plantCards(style='width: 350px')
-                //    .title-bar
-                //        .title-bar-text= plant[1]
-                //        .title-bar-controls
-                //            button(aria-label='Minimize')
-                //            // make bigger on click?
-                //            button(aria-label='Maximize')
-                //            button(aria-label='Close')
-                //    .window-body
-                //        img#plant(src='/static/images/' + plant[1] + '.jpg', value=`${plant[0]}` alt='No picture yet!')
-                //        hr
-                //        .information#info(blockID=`${plant[0]}` style='display: none;')
-                //            #commonName(commonName=`${plant[0]}`)
-                //                p.name Common Name
-                //            #scientific(scientific=`${plant[0]}`)
-                //                p.name Scientific Name
-                //            #sunlight(sunlight=`${plant[0]}`)
-                //                p.name Sunlight
-                //            #watering(watering=`${plant[0]}`)
-                //                p.name Watering
-                //            #propagation(propagation=`${plant[0]}`)
-                //                p.name Propagation
-                //        //
-                //        section.field-row(style='justify-content: flex-end')
-                //            button(onclick=`get_info(${plant[0]})`) More Info
-                //            button(onclick= `removePlant(${plant[0]})`) Delete Plant
-                        //.overlay2.top-0
-                        //    | whaaaaaat
-                .window.plantCards(style='width: 350px')
+                .window.plantCards
                     .title-bar
                         .title-bar-text= plant[1]
                         .title-bar-controls
                             button(aria-label='Minimize')
-                            // make bigger on click?
                             button(aria-label='Maximize')
                             button(aria-label='Close')
                     .window-body
@@ -124,13 +96,6 @@ block content
                                         #propagation(propagation=`${plant[0]}`)
                                             p.name Propagation
                         hr
-
                         section.field-row(style='justify-content: flex-end')
                             button(onclick=`get_info(${plant[0]})`) More Info
                             button(onclick= `removePlant(${plant[0]})`) Delete Plant
-
-
-
-
-
-
