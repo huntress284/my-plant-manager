@@ -40,6 +40,7 @@ button{
 
 .window {
     position: absolute;
+    width: 450px;
     top: 50%;
     left: 50%;
     font-size: 50px;
@@ -59,11 +60,11 @@ button{
 .plantCards {
     position: unset;
     transform: none;
-    padding: 30%;
 }
 
 #plant {
     width: 85%;
+    height: 75%;
     border: 5px solid white;
     box-shadow: rgba(240, 46, 170, 0.4) -5px 5px
 }
@@ -85,7 +86,6 @@ button{
 }
 
 /* -------------------------- WINDOWS 98 THEME --------------------------*/
-
 :root {
     /* Color */
     --text-color: #222222;
@@ -96,9 +96,6 @@ button{
     --window-frame: #0a0a0a;
     --dialog-blue: #e283b7;
     --dialog-blue-light: #d06ca0;
-    --dialog-gray: #808080;
-    --dialog-gray-light: #b5b5b5;
-    --link-blue: #0000ff;
 
     /* Spacing */
     --element-spacing: 8px;
@@ -166,7 +163,7 @@ button {
     box-shadow: var(--border-window-outer), var(--border-window-inner);
     background: var(--surface);
     padding: 3px;
-    margin: 1em;
+    /*margin: 1em;*/
     background-color: #f2afcc;
 }
 
@@ -443,70 +440,70 @@ body {
     }
 }
 
-.name {
-    white-space: nowrap;
-    padding: 0px;
-    margin: 10px;
-    background-color: #c976aa;
-    box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
-    box-sizing: border-box;
-    color: #fff;
-    font-size: 12px;
-    outline: none;
-    outline: 0;
-    text-align: center;
-    transition: transform 150ms, box-shadow 150ms;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-}
-.name:hover {
-    box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
-    transform: translateY(-2px);
-}
+/*.name {*/
+/*    white-space: nowrap;*/
+/*    padding: 0px;*/
+/*    margin: 10px;*/
+/*    background-color: #c976aa;*/
+/*    box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;*/
+/*    box-sizing: border-box;*/
+/*    color: #fff;*/
+/*    font-size: 12px;*/
+/*    outline: none;*/
+/*    outline: 0;*/
+/*    text-align: center;*/
+/*    transition: transform 150ms, box-shadow 150ms;*/
+/*    user-select: none;*/
+/*    -webkit-user-select: none;*/
+/*    touch-action: manipulation;*/
+/*}*/
+/*.name:hover {*/
+/*    box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;*/
+/*    transform: translateY(-2px);*/
+/*}*/
 
 
-.flip-card {
-    background-color: transparent;
-    width: 300px;
-    height: 330px;
-    perspective: 1000px; /* Remove this if you don't want the 3D effect */
-}
+/*.flip-card {*/
+/*    background-color: transparent;*/
+/*    width: 300px;*/
+/*    height: 330px;*/
+/*    perspective: 1000px; !* Remove this if you don't want the 3D effect *!*/
+/*}*/
 
-/* This container is needed to position the front and back side */
-.flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-}
+/*!* This container is needed to position the front and back side *!*/
+/*.flip-card-inner {*/
+/*    position: relative;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    text-align: center;*/
+/*    transition: transform 0.8s;*/
+/*    transform-style: preserve-3d;*/
+/*}*/
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
+/*!* Do an horizontal flip when you move the mouse over the flip box container *!*/
+/*.flip-card:hover .flip-card-inner {*/
+/*    transform: rotateY(180deg);*/
+/*}*/
 
-/* Position the front and back side */
-.flip-card-front, .flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
-}
+/*!* Position the front and back side *!*/
+/*.flip-card-front, .flip-card-back {*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    -webkit-backface-visibility: hidden; !* Safari *!*/
+/*    backface-visibility: hidden;*/
+/*}*/
 
-/* Style the front side (fallback if image is missing) */
-.flip-card-front {
-    color: black;
-}
+/*!* Style the front side (fallback if image is missing) *!*/
+/*.flip-card-front {*/
+/*    color: black;*/
+/*}*/
 
-/* Style the back side */
-.flip-card-back {
-    background-color: transparent;
-    color: white;
-    transform: rotateY(180deg);
-}
+/*!* Style the back side *!*/
+/*.flip-card-back {*/
+/*    background-color: transparent;*/
+/*    color: white;*/
+/*    transform: rotateY(180deg);*/
+/*}*/
 
 
