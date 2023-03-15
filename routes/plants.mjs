@@ -22,12 +22,6 @@ router.route('/plants')
 		res.status(204).end();
 	});
 
-// router.route('/plants/:plantId) to do something with specific plant
-router.route('/nursery')
-	.get(async (req, res) => {
-
-		res.status(200).json(data);
-	});
 
 
 export { router as plants }

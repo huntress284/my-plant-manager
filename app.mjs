@@ -17,25 +17,22 @@ const __dirname = path.dirname(__filename);
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
-
 app.get('/', async (req, res) => {
     const url = 'http://localhost:3001/api/plants';
-
     const response = await fetch(url);
     const json = await response.json();
 
     res.locals.plants = json;
-
     console.log(res.locals);
-
     // console.log(json);
-
     res.status(200).render('home');
 });
+
 
 app.get('/nursery', async (req, res) => {
     res.status(200).render('nursery');
 });
+
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -45,9 +42,13 @@ var storage = multer.diskStorage({
         cb(null, req.body.picname + ".jpg")
     }
 })
+
+
 var upload = multer({ storage: storage })
 
+
 app.use('/uploads', express.static('uploads'));
+
 
 app.post('/', upload.single('profile-file', 'picname'), async function (req, res, next) {
     // req.file is the `profile-file` file

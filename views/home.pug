@@ -9,43 +9,41 @@ block content
         .cloud.x4
         .cloud.x5
 
-    button(data-bs-toggle='modal', data-bs-target='#exampleModal', onclick="addPlant()") Create new plant
+    //button(data-bs-toggle='modal', data-bs-target='#exampleModal', onclick="addPlant()") Create new plant
 
     // Modal
     #exampleModal.modal.fade(tabindex='-1', aria-labelledby='exampleModalLabel', aria-hidden='true')
         .modal-dialog
             .modal-content
                 .modal-header
-                    h1#exampleModalLabel.modal-title.fs-5 Modal title
+                    h1#exampleModalLabel.modal-title.fs-5 Create Plant
                     button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
                 .modal-body
                     form#form1
                         .mb-3
                             label.form-label(for='plantId') Plant ID
-                            input#plantId.form-control(type='text', aria-describedby='plantName', placeholder='Plant Name')
+                            input#plantId.form-control(type='text', placeholder='Plant ID')
                         .mb-3
                             label.form-label(for='plantInput') Plant Name
-                            input#plantInput.form-control(type='text', placeholder='PlantID')
-                        .input-group.mb-3
-                            input#inputGroupFile01.form-control(type='file')
-                        button.btn.btn-primary(type='submit') Submit Plant Photo
+                            input#plantInput.form-control(type='text', placeholder='Plant Name')
+
                     form#form2(method='POST', action='/', enctype='multipart/form-data')
-                        div
-                            label name
-                            input(type='text', name='picname', required='')
-                        div
+                        .mb-3
+                            label.form-label(for='picName') name
+                            input#picName(type='text', name='picname', required='', placeholder='Photo Name')
+                        .mb-3
                             label Upload profile picture
-                            input(type='file', name='profile-file', required='')
-                        div
-                            input(type='submit', value='Upload')
+                            input.form-control(type='file', name='profile-file', required='')
+
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
                     button.btn.btn-primary(type='button', onclick="addPlant()") Save changes
 
+    h4#total.my-4
 
-    h4#total
     #noneReturned
-    ul#demo.p-4
+
+    ul#demo.my-2
 
     script.
         async function off() {
@@ -58,44 +56,44 @@ block content
                 .title-bar-text
                     | Error Code 429
                 .title-bar-controls
-                    button(aria-label='Minimize')
-                    button(aria-label='Maximize')
-                    button(aria-label='Close')
+                    //button(aria-label='Minimize')
+                    //button(aria-label='Maximize')
+                    //button(aria-label='Close')
             .window-body
                 img(src='/static/images/confused.jpg')
                 h3 Not enough money!
                 section.field-row(style='justify-content: flex-end')
                     button(onclick="off()") OK
-                    button Cancel
+                    //button Cancel
 
     .row.row-cols-2.row-cols-md-4.g-4
         each plant of plants
             .d-flex.justify-content-evenly
                 .window.plantCards
                     .title-bar
-                        .title-bar-text= plant[1]
-                        .title-bar-controls
-                            button(aria-label='Minimize')
-                            button(aria-label='Maximize')
-                            button(aria-label='Close')
+                        .title-bar-text= plant[2]
+                        //.title-bar-controls
+                        //    button(aria-label='Minimize')
+                        //    button(aria-label='Maximize')
+                        //    button(aria-label='Close')
                     .window-body
                         .flip-card
                             .flip-card-inner
                                 .flip-card-front
-                                    img#plant(src='/static/images/' + plant[1] + '.jpg', value=`${plant[0]}` alt='No picture yet!')
-                                .flip-card-back
-                                    .information#info(blockID=`${plant[0]}` style='display: none;')
-                                        #commonName(commonName=`${plant[0]}`)
-                                            p.name Common Name
-                                        #scientific(scientific=`${plant[0]}`)
-                                            p.name Scientific Name
-                                        #sunlight(sunlight=`${plant[0]}`)
-                                            p.name Sunlight
-                                        #watering(watering=`${plant[0]}`)
-                                            p.name Watering
-                                        #propagation(propagation=`${plant[0]}`)
-                                            p.name Propagation
+                                    img#plant(src='/static/images/' + plant[2] + '.jpg', value=`${plant[1]}` alt='No picture yet!')
+                                .flip-card-front.ontop(blockID=`${plant[1]}` style='display: none;')
+                                    .information#info
+                                        #commonName(commonName=`${plant[1]}`)
+                                            .name Common Name:
+                                        #scientific(scientific=`${plant[1]}`)
+                                            .name Scientific Name:
+                                        #sunlight(sunlight=`${plant[1]}`)
+                                            .name Sunlight:
+                                        #watering(watering=`${plant[1]}`)
+                                            .name Watering:
+                                        #propagation(propagation=`${plant[1]}`)
+                                            .name Propagation:
                         hr
                         section.field-row(style='justify-content: flex-end')
-                            button(onclick=`get_info(${plant[0]})`) More Info
-                            button(onclick= `removePlant(${plant[0]})`) Delete Plant
+                            button(onclick=`get_info(${plant[1]})`) More Info
+                            button#toDelete(data-uuid= `${plant[0]}` onclick= `removePlant()`) Delete Plant

@@ -15,7 +15,7 @@ async function searchPlant() {
     const json = await response.json();
 
     // console.log("Total plants returned: " + json.total);
-    document.getElementById('total').innerHTML = "Total Number: " + json.total;
+    document.getElementById('total').innerHTML = "Plants: " + json.total;
 
     if(json.total == 0){
         console.log("Not in the API :(");
@@ -27,18 +27,39 @@ async function searchPlant() {
     // link to plant to add id, name, etc
     let list = document.getElementById('demo');
     for (let i = 0; i < json.total; i++) {
-        // console.log(json.data[i].id);
 
         let li = document.createElement("li");
         let button = document.createElement("button");
         button.setAttribute('id', 'theButton');
         button.setAttribute('data-bs-toggle', 'modal');
         button.setAttribute('data-bs-target', '#exampleModal');
+        button.setAttribute('data-id', json.data[i].id);
+        // button.setAttribute('data-name', json.data[i].common_name);
 
-        li.innerText = "Plant ID: " + json.data[i].id + " Plant Common Name: " + json.data[i].common_name;
-
+        li.innerText = " Plant Common Name: " + json.data[i].common_name;
         li.appendChild(button).innerHTML = "Add this plant!";
         list.appendChild(li);
+        console.log(json.data[i].id);
+
+
+        const buttons = document.getElementsByTagName('button');
+        const result = document.getElementById('result');
+
+        const buttonPressed = e => {
+            console.log(e.target.dataset);
+
+            document.getElementById('plantId').setAttribute('value', e.target.dataset.id);
+            document.getElementById('plantId').setAttribute('disabled', 'true');
+            // document.getElementById('plantInput').setAttribute('value', e.target.dataset.id);
+
+
+
+
+        }
+
+        for(let button of buttons){
+            button.addEventListener("click", buttonPressed);
+        }
 
 
 
