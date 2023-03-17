@@ -30,6 +30,13 @@ app.get('/', async (req, res) => {
 
 
 app.get('/nursery', async (req, res) => {
+    const url = 'http://localhost:3001/api/nursery';
+    const response = await fetch(url);
+    const json = await response.json();
+
+    res.locals.plants = json;
+    console.log(res.locals);
+
     res.status(200).render('nursery');
 });
 
@@ -62,6 +69,18 @@ app.post('/', upload.single('profile-file', 'picname'), async function (req, res
     res.locals.plants = json;
     console.log(res.locals);
     res.status(200).render('home');
+})
+app.post('/nursery', upload.single('profile-file', 'picname'), async function (req, res, next) {
+    // req.file is the `profile-file` file
+    // req.body will hold the text fields, if there were any
+    console.log(JSON.stringify(req.body.picname))
+    console.log(JSON.stringify(req.file))
+    const url = 'http://localhost:3001/api/nursery';
+    const response = await fetch(url);
+    const json = await response.json();
+    res.locals.plants = json;
+    console.log(res.locals);
+    res.status(200).render('nursery');
 })
 
 export {app}
