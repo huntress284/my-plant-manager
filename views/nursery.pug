@@ -1,9 +1,48 @@
 include default
 
-    title FILE UPLOAD DEMO
-h1 Single File Upload Demo
-form(action='/nursery', enctype='multipart/form-data', method='POST')
-    span Upload Profile Picture:
-    input(type='file', name='mypic', required='')
-    br
-    input(type='submit', value='submit')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Quicksand')
+    link(rel='stylesheet' type="text/css" href='/static/css/nursery.css')
+
+
+    h1.nursery the nursery
+    button.btn.btn-outline-secondary(data-bs-toggle='modal', data-bs-target='#exampleModal', onclick="addPlant()") Add Baby
+
+    #exampleModal.modal.fade(tabindex='-1', aria-labelledby='exampleModalLabel', aria-hidden='true')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h1#exampleModalLabel.modal-title.fs-5 Modal title
+                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+                .modal-body
+                    form#form1
+                        .mb-3
+                            label.form-label(for='plantId') Plant ID
+                            input#plantId.form-control(type='text', aria-describedby='plantName', placeholder='Plant Name')
+                        .mb-3
+                            label.form-label(for='plantInput') Plant Name
+                            input#plantInput.form-control(type='text', placeholder='PlantID')
+                    form#form2(method='POST', action='/nursery', enctype='multipart/form-data')
+                        div
+                            label name
+                            input(type='text', name='picname', required='')
+                        div
+                            label Upload profile picture
+                            input(type='file', name='profile-file', required='')
+                        div
+                            input(type='submit', value='Upload')
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
+                    button.btn.btn-primary(type='button', onclick="addBaby()") Save changes
+
+    .row.row-cols-1.row-cols-md-3.g-4
+        each baby of plants
+            .col
+                .card
+                    img.card-img-top(src='/static/images/' + baby[2] + '.jpg', alt=baby[2])
+                    .card-body
+                        h5.card-title= baby[2]
+                        //.card-text heelo
+                        hr
+                        section.field-row(style='justify-content: flex-end')
+                            button.btn.btn-outline-secondary water me
+                            button.btn.btn-outline-secondary#toDelete(data-uuid= `${baby[0]}` onclick= `removeBaby()`) Delete Plant
