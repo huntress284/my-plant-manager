@@ -16,25 +16,25 @@ block content
         .modal-dialog
             .modal-content
                 .modal-header
-                    h1#exampleModalLabel.modal-title.fs-5 Create Plant
+                    h1#exampleModalLabel.modal-title.fs-5 Modal title
                     button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
                 .modal-body
                     form#form1
                         .mb-3
                             label.form-label(for='plantId') Plant ID
-                            input#plantId.form-control(type='text', placeholder='Plant ID')
+                            input#plantId.form-control(type='text', aria-describedby='plantName', placeholder='Plant Name')
                         .mb-3
                             label.form-label(for='plantInput') Plant Name
-                            input#plantInput.form-control(type='text', placeholder='Plant Name')
-
+                            input#plantInput.form-control(type='text', placeholder='PlantID')
                     form#form2(method='POST', action='/', enctype='multipart/form-data')
-                        .mb-3
-                            label.form-label(for='picName') name
-                            input#picName(type='text', name='picname', required='', placeholder='Photo Name')
-                        .mb-3
+                        div
+                            label name
+                            input(type='text', name='picname', required='')
+                        div
                             label Upload profile picture
-                            input.form-control(type='file', name='profile-file', required='')
-
+                            input(type='file', name='profile-file', required='')
+                        div
+                            input(type='submit', value='Upload')
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
                     button.btn.btn-primary(type='button', onclick="addPlant()") Save changes
@@ -66,34 +66,27 @@ block content
                     button(onclick="off()") OK
                     //button Cancel
 
-    .row.row-cols-2.row-cols-md-4.g-4
+    .row.row-cols-1.row-cols-md-3.g-4
         each plant of plants
-            .d-flex.justify-content-evenly
-                .window.plantCards
-                    .title-bar
-                        .title-bar-text= plant[2]
-                        //.title-bar-controls
-                        //    button(aria-label='Minimize')
-                        //    button(aria-label='Maximize')
-                        //    button(aria-label='Close')
-                    .window-body
-                        .flip-card
-                            .flip-card-inner
-                                .flip-card-front
-                                    img#plant(src='/static/images/' + plant[2] + '.jpg', value=`${plant[1]}` alt='No picture yet!')
-                                .flip-card-front.ontop(blockID=`${plant[1]}` style='display: none;')
-                                    .information#info
-                                        #commonName(commonName=`${plant[1]}`)
-                                            .name Common Name:
-                                        #scientific(scientific=`${plant[1]}`)
-                                            .name Scientific Name:
-                                        #sunlight(sunlight=`${plant[1]}`)
-                                            .name Sunlight:
-                                        #watering(watering=`${plant[1]}`)
-                                            .name Watering:
-                                        #propagation(propagation=`${plant[1]}`)
-                                            .name Propagation:
-                        hr
-                        section.field-row(style='justify-content: flex-end')
-                            button(onclick=`get_info(${plant[1]})`) More Info
-                            button#toDelete(data-uuid= `${plant[0]}` onclick= `removePlant()`) Delete Plant
+
+                .col
+                    .card
+                        img.card-img-top(src='/static/images/' + plant[2] + '.jpg', alt=plant[2])
+                        .card-body
+                            h5.card-title= plant[2]
+                            .card-text
+                                .information#info(blockID=`${plant[1]}` style='display: none;')
+                                    #commonName(commonName=`${plant[1]}`)
+                                        .name Common Name:
+                                    #scientific(scientific=`${plant[1]}`)
+                                        .name Scientific Name:
+                                    #sunlight(sunlight=`${plant[1]}`)
+                                        .name Sunlight:
+                                    #watering(watering=`${plant[1]}`)
+                                        .name Watering:
+                                    #propagation(propagation=`${plant[1]}`)
+                                        .name Propagation:
+                            hr
+                            section.field-row(style='justify-content: flex-end')
+                                button.btn.btn-outline-secondary(onclick=`get_info(${plant[1]})`) More Info
+                                button.btn.btn-outline-secondary#toDelete(data-uuid= `${plant[0]}` onclick= `removePlant()`) Delete Plant
