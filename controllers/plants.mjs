@@ -39,3 +39,32 @@ export async function delete_plant(plantId) {
 }
 
 
+
+
+export async function list_nursery(plantId, plantName) {
+    let data;
+    try {
+        const session = await mysqlx.getSession(config);
+        data = await session.sql(`CALL list_nursery();`).execute();
+        session.close();
+        return data.fetchAll();
+    } catch (error) {
+        console.error(error);
+    }
+
+}
+export async function create_nursery(plantId, plantName) {
+    const session = await mysqlx.getSession(config);
+
+    await session.sql('CALL create_baby(?,?);').bind(plantId, plantName).execute();
+    session.close();
+}
+export async function delete_nursery(plantId) {
+
+    const session = await mysqlx.getSession(config);
+    await session.sql('CALL delete_baby(?);').bind(plantId).execute();
+    session.close();
+
+}
+
+
