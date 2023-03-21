@@ -29,6 +29,16 @@ export async function create_plant(plantId, plantName) {
     session.close();
 
 }
+export async function update_plant(plantId, plantName) {
+
+    const session = await mysqlx.getSession(config);
+    console.log("plant to water: " + plantId);
+    console.log("date: " + plantName);
+    await session.sql('CALL water_plant(?,?);').bind(plantId, plantName).execute();
+    session.close();
+
+}
+
 
 export async function delete_plant(plantId) {
 
@@ -37,9 +47,6 @@ export async function delete_plant(plantId) {
     session.close();
 
 }
-
-
-
 
 export async function list_nursery(plantId, plantName) {
     let data;
@@ -63,6 +70,27 @@ export async function delete_nursery(plantId) {
 
     const session = await mysqlx.getSession(config);
     await session.sql('CALL delete_baby(?);').bind(plantId).execute();
+    session.close();
+
+}
+
+// GRAVEYARD
+export async function list_graveyard() {
+    let data;
+    try {
+        const session = await mysqlx.getSession(config);
+        data = await session.sql(`CALL list_graveyard();`).execute();
+        session.close();
+        return data.fetchAll();
+    } catch (error) {
+        console.error(error);
+    }
+}
+export async function move_to_graveyard(plantId) {
+
+    const session = await mysqlx.getSession(config);
+    console.log("Plant to move: " + plantId);
+    await session.sql('CALL move_to_graveyard(?);').bind(plantId).execute();
     session.close();
 
 }
