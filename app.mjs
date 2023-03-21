@@ -40,6 +40,17 @@ app.get('/nursery', async (req, res) => {
     res.status(200).render('nursery');
 });
 
+app.get('/graveyard', async (req, res) => {
+    const url = 'http://localhost:3001/api/graveyard';
+    const response = await fetch(url);
+    const json = await response.json();
+
+    res.locals.plants = json;
+    console.log(res.locals);
+
+    res.status(200).render('graveyard');
+});
+
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {

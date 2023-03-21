@@ -1,6 +1,13 @@
 async function get_info(x) {
     console.clear();
     x.toString();
+
+
+    var myVar;
+    myVar = setTimeout(showInfo, 1000);
+    document.getElementById("loader").style.display = "block";
+
+
     // PLANT DETAILS
     const url = "https://perenual.com/api/species/details/" + x + "?key=sk-8k2463e99f604d8a438";
     const options = {
@@ -21,13 +28,17 @@ async function get_info(x) {
     const sunlight = json.sunlight;
 
     // Show element
-    document.querySelector(`[blockID= "${x}"]`).style.display = "block";
-    // Add details and show
+    // document.querySelector(`[blockID= "${x}"]`).style.display = "block";
+    // // Add details and show
     document.querySelector(`[commonName= "${x}"]`).append(common_name);
     document.querySelector(`[scientific= "${x}"]`).append(scientific_name);
     document.querySelector(`[sunlight= "${x}"]`).append(sunlight);
     document.querySelector(`[watering= "${x}"]`).append(watering);
     document.querySelector(`[propagation= "${x}"]`).append(propagation);
+}
+async function showInfo() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("info").style.display = "block";
 }
 
 async function addPlant() {
@@ -70,6 +81,53 @@ async function removePlant() {
     const url = 'http://localhost:3001/api/plants';
     const options = {
         method: 'DELETE',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            plantId: id
+        })
+    };
+    const response = await fetch(url, options);
+    if (response.ok) {
+        location.reload();
+    }
+}
+
+async function water(){
+    const today = new Date();
+    // alert(today);
+
+    id = document.querySelector('#toWater').dataset.water;
+    console.log("Plant ID to water: " + document.querySelector('#toWater').dataset.water);
+
+    const url = 'http://localhost:3001/api/plants:id';
+    const options = {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            plantId: id,
+            plantName: today
+        })
+    };
+    const response = await fetch(url, options);
+    if (response.ok) {
+        location.reload();
+    }
+
+}
+
+
+async function graveyard(){
+    alert('heello');
+    id = document.querySelector('#graveyard').dataset.graveyard;
+    console.log("Plant ID to water: " + document.querySelector('#graveyard').dataset.graveyard);
+
+    const url = 'http://localhost:3001/api/graveyard';
+    const options = {
+        method: 'PUT',
         headers: {
             'content-type': 'application/json'
         },
