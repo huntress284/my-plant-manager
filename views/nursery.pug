@@ -41,8 +41,25 @@ include default
                     img.card-img-top(src='/static/images/' + baby[2] + '.jpg', alt=baby[2])
                     .card-body
                         h5.card-title= baby[2]
-                        //.card-text heelo
+                        .card-text
+                            //.lead Last Water&nbsp
+                            //    i.fa-solid.fa-droplet
+                            //p= baby[3]
                         hr
-                        section.field-row(style='justify-content: flex-end')
-                            button.btn.btn-outline-secondary water me
-                            button.btn.btn-outline-secondary#toDelete(data-uuid= `${baby[0]}` onclick= `removeBaby()`) Delete Plant
+                        .d-flex.flex-column
+                            //button.btn.btn-outline-secondary.my-1#toDelete(data-uuid= `${baby[0]}` onclick= `removeBaby()`) Delete Plant
+                            button.btn.btn-outline-secondary.my-1#toWater(data-water= `${baby[0]}` onclick= `water()`) Water! &nbsp;
+                                i.fa-solid.fa-droplet
+                            .dropdown
+                                a.btn.btn-outline-secondary.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+                                    | More
+                                ul.dropdown-menu
+                                    li
+                                        a.dropdown-item(href='#') Move to Greenhouse &nbsp
+                                            i.fa-solid.fa-house
+                                    li
+                                        a.dropdown-item(href='#') Move to Graveyard &nbsp
+                                            i.fa-solid.fa-plant-wilt
+                                    li
+                                        a.dropdown-item#toDelete(href='#' data-uuid= `${baby[0]}` onclick= `removeBaby()`) Delete Plant &nbsp
+                                            .fa-solid.fa-circle-xmark

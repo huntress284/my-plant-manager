@@ -48,6 +48,7 @@ block content
     script.
         async function off() {
             document.getElementById('overlay').style.display = "none";
+            document.getElementById('info').style.display = "none";
         }
 
     #overlay(style="display:none;")
@@ -73,9 +74,17 @@ block content
                     .card
                         img.card-img-top(src='/static/images/' + plant[2] + '.jpg', alt=plant[2])
                         .card-body
-                            h5.card-title= plant[2]
+                            h5.card-title
+                                i.fa-solid.fa-leaf= ' ' + `${plant[2]}`
+
+                            hr
                             .card-text
+                                .lead Last Water&nbsp
+                                    i.fa-solid.fa-droplet
+                                p= plant[3]
+                                p#loader(style='display: none;') loading...
                                 .information#info(blockID=`${plant[1]}` style='display: none;')
+                                    button.btn.btn-outline-secondary(onclick=`off()`) Close
                                     #commonName(commonName=`${plant[1]}`)
                                         .name Common Name:
                                     #scientific(scientific=`${plant[1]}`)
@@ -87,6 +96,20 @@ block content
                                     #propagation(propagation=`${plant[1]}`)
                                         .name Propagation:
                             hr
-                            section.field-row(style='justify-content: flex-end')
-                                button.btn.btn-outline-secondary(onclick=`get_info(${plant[1]})`) More Info
-                                button.btn.btn-outline-secondary#toDelete(data-uuid= `${plant[0]}` onclick= `removePlant()`) Delete Plant
+                            .d-flex.flex-column
+                                button.btn.btn-outline-secondary.my-1(onclick=`get_info(${plant[1]})`) More Info &nbsp
+                                    i.fa-solid.fa-magnifying-glass
+                                //button.btn.btn-outline-secondary.my-1#toDelete(data-uuid= `${plant[0]}` onclick= `removePlant()`) Delete Plant &nbsp;
+                                //    i.fa-solid.fa-circle-xmark
+                                button.btn.btn-outline-secondary.my-1#toWater(data-water= `${plant[0]}` onclick= `water()`) Water! &nbsp;
+                                    i.fa-solid.fa-droplet
+                                .dropdown
+                                    a.btn.btn-outline-secondary.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+                                        | More
+                                    ul.dropdown-menu
+                                        li
+                                            a.dropdown-item#graveyard(data-graveyard= `${plant[0]}` href='#' onclick= `graveyard()`) Move to Graveyard &nbsp
+                                                i.fa-solid.fa-plant-wilt
+                                        li
+                                            a.dropdown-item#toDelete(href='#' data-uuid= `${plant[0]}` onclick= `removePlant()`) Delete Plant &nbsp
+                                                i.fa-solid.fa-circle-xmark
