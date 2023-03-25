@@ -16,6 +16,10 @@ button {
     white-space: nowrap;
 }
 
+/*.fa-droplet{*/
+/*    color: lightseagreen;*/
+/*}*/
+
 .col {
     width: 20%;
 }
@@ -209,4 +213,17 @@ body {
     font-family: 'Quicksand';
 }
 
+#spriteContainer{
+    width: 300px;
+    height: 300px;
+    display: block;
+    background-image: url("../images/sprite2.png");
+    animation: sprite 3s steps(6) infinite;
+}
+
+@keyframes sprite {
+    100% {
+        background-position: -1800px;
+    }
+}
 
