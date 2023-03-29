@@ -17,7 +17,7 @@ async function searchPlant() {
     // console.log("Total plants returned: " + json.total);
     document.getElementById('total').innerHTML = "Plants: " + json.total;
 
-    if(json.total == 0){
+    if (json.total == 0) {
         console.log("Not in the API :(");
         const none = document.getElementById('noneReturned');
         none.innerText = "Plant isn't in API, add new here." + "\n";
@@ -52,15 +52,11 @@ async function searchPlant() {
             document.getElementById('plantId').setAttribute('disabled', 'true');
             // document.getElementById('plantInput').setAttribute('value', e.target.dataset.id);
 
-
-
-
         }
 
-        for(let button of buttons){
+        for (let button of buttons) {
             button.addEventListener("click", buttonPressed);
         }
-
 
 
     }

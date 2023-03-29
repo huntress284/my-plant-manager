@@ -2,15 +2,28 @@ extends default
 
 block content
 
-    #clouds
-        .cloud.x1
-        .cloud.x2
-        .cloud.x3
-        .cloud.x4
-        .cloud.x5
+
+    //#clouds
+    //    .cloud.x1
+    //    .cloud.x2
+    //    .cloud.x3
+    //    .cloud.x4
+    //    .cloud.x5
 
     //button(data-bs-toggle='modal', data-bs-target='#exampleModal', onclick="addPlant()") Create new plant
+    .d-flex.searchBar.my-2.align-items-center
+        label.form-label#add(for='mySearch').mx-2 Add Plant
+        input#mySearch.form-control.me-2(autocomplete='off' type='search', placeholder='Search', aria-label='Search')
+        button.btn.btn-outline-secondary(onclick='searchPlant()') Search!
 
+    h4#total.my-4
+
+    #noneReturned
+
+    ul#demo.my-2
+
+    //#spriteContainer
+    hr
     h1 The Greenhouse
     // Modal
     #exampleModal.modal.fade(tabindex='-1', aria-labelledby='exampleModalLabel', aria-hidden='true')
@@ -23,14 +36,20 @@ block content
                     form#form1
                         .mb-3
                             label.form-label(for='plantId') Plant ID
-                            input#plantId.form-control(type='text', aria-describedby='plantName', placeholder='Plant Name')
+                            input#plantId.form-control(autocomplete='off' type='text', aria-describedby='plantName', placeholder='Plant Name')
                         .mb-3
                             label.form-label(for='plantInput') Plant Name
-                            input#plantInput.form-control(type='text', placeholder='PlantID')
+                            input#plantInput.form-control(autocomplete='off' type='text', placeholder='PlantID')
+                        .mb-3
+                            select.form-select#status(aria-label='Select')
+                                option(selected='') Open
+                                option(value='adult') Adult
+                                option(value='baby') Baby
+
                     form#form2(method='POST', action='/', enctype='multipart/form-data')
                         div
                             label name
-                            input(type='text', name='picname', required='')
+                            input(autocomplete='off' type='text', name='picname', required='')
                         div
                             label Upload profile picture
                             input(type='file', name='profile-file', required='')
@@ -40,11 +59,6 @@ block content
                     button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
                     button.btn.btn-primary(type='button', onclick="addPlant()") Save changes
 
-    h4#total.my-4
-
-    #noneReturned
-
-    ul#demo.my-2
 
     script.
         async function off() {
@@ -67,51 +81,57 @@ block content
                 section.field-row(style='justify-content: flex-end')
                     button(onclick="off()") OK
                     //button Cancel
-
     .row.row-cols-1.row-cols-md-3.g-4
         each plant of plants
 
-            .col
-                .card
-                    img.card-img-top(src='/static/images/' + plant[2] + '.jpg', alt=plant[2])
-                    .card-body
-                        h5.card-title
-                            i.fa-solid.fa-leaf= ' ' + `${plant[2]}`
+            if plant[4] === 'adult'
 
-                        hr
-                        .card-text
-                            .lead Last Water&nbsp
-                                i.fa-solid.fa-droplet
-                            p= plant[3]
-                            p#loader(style='display: none;') loading...
-                            .information#info(blockID=`${plant[1]}` style='display: none;')
-                                button.btn.btn-outline-secondary(onclick=`off()`) Close
-                                #commonName(commonName=`${plant[1]}`)
-                                    .name(name='test') Common Name:
-                                #scientific(scientific=`${plant[1]}`)
-                                    .name(name='test') Scientific Name:
-                                #sunlight(sunlight=`${plant[1]}`)
+                .col
+                    .card
+                        img.card-img-top(src='/static/images/' + plant[2] + '.jpg', alt=plant[2])
+                        .card-body
+                            h5.card-title
+                                i.fa-solid.fa-leaf= ' ' + `${plant[2]}`
+
+                            //hr
+                            .card-text
+                                .lead Last Water&nbsp
+                                    i.fa-solid.fa-droplet
+                                p= plant[3]
+
+                                .spinner-border.text-success#loader(data-loader= `${plant[0]}` role='status' style='display: none;')
+                                    span.visually-hidden Loading...
+
+                                button.btn.btn-outline-secondary(onclick= `test_loader()`) test spinner
+
+                                .information#info
+                                    button.btn.btn-outline-secondary(onclick=`off()`) Close
+
+                                    .name Common Name:
+                                        #commonName(commonName=`${plant[0]}`)
+                                    .name Scientific Name:
+                                        #scientific(scientific=`${plant[0]}`)
                                     .name Sunlight:
-                                #watering(watering=`${plant[1]}`)
+                                        #sunlight(sunlight=`${plant[0]}`)
                                     .name Watering:
-                                #propagation(propagation=`${plant[1]}`)
+                                        #watering(watering=`${plant[0]}`)
                                     .name Propagation:
-                        hr
-                        .d-flex.flex-column
-                            button.btn.btn-outline-secondary.my-1(onclick=`get_info(${plant[1]})`) More Info &nbsp
-                                i.fa-solid.fa-magnifying-glass
-                            //button.btn.btn-outline-secondary.my-1#toDelete(data-uuid= `${plant[0]}` onclick= `removePlant()`) Delete Plant &nbsp;
-                            //    i.fa-solid.fa-circle-xmark
-                            button.btn.btn-outline-secondary.my-1#toWater(data-water= `${plant[0]}` onclick= `water()`) Water! &nbsp;
-                                i.fa-solid.fa-droplet
-                            .dropdown
-                                a.btn.btn-outline-secondary.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
-                                    | More
-                                ul.dropdown-menu
-                                    li
-                                        a.dropdown-item#graveyard(data-graveyard= `${plant[0]}` href='#' onclick= `graveyard()`) Move to Graveyard &nbsp
-                                            i.fa-solid.fa-plant-wilt
-                                    li
-                                        a.dropdown-item#toDelete(href='#' data-uuid= `${plant[0]}` onclick= `removePlant()`) Delete Plant &nbsp
-                                            i.fa-solid.fa-circle-xmark
-    #spriteContainer
+                                        #propagation(propagation=`${plant[0]}`)
+                            hr
+                            .d-flex.flex-column
+                                button.btn.btn-outline-secondary.my-1#getInfo(data-info= `${plant[0]}` onclick=`get_info( this.getAttribute('data-info')  ,${plant[1]})`) More Info &nbsp
+                                    i.fa-solid.fa-magnifying-glass
+                                //button.btn.btn-outline-secondary.my-1#toDelete(data-uuid= `${plant[0]}` onclick= `removePlant()`) Delete Plant &nbsp;
+                                //    i.fa-solid.fa-circle-xmark
+                                button.btn.btn-outline-secondary.my-1#toWater(data-water= `${plant[0]}` onclick= `water()`) Water! &nbsp;
+                                    i.fa-solid.fa-droplet
+                                .dropdown
+                                    a.btn.btn-outline-secondary.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+                                        | More
+                                    ul.dropdown-menu
+                                        li
+                                            a.dropdown-item#graveyard(data-graveyard= `${plant[0]}` href='#' onclick= `graveyard()`) Move to Graveyard &nbsp
+                                                i.fa-solid.fa-plant-wilt
+                                        li
+                                            a.dropdown-item#toDelete(href='#' data-uuid= `${plant[0]}` onclick= `removePlant()`) Delete Plant &nbsp
+                                                i.fa-solid.fa-circle-xmark

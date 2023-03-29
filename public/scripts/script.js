@@ -1,11 +1,13 @@
-async function get_info(x) {
+async function get_info(id, x) {
     console.clear();
     x.toString();
 
+    console.log("Card ID: " + id);
 
     var myVar;
     myVar = setTimeout(showInfo, 1000);
     document.getElementById("loader").style.display = "block";
+
 
 
     // PLANT DETAILS
@@ -27,25 +29,36 @@ async function get_info(x) {
     const watering = json.watering;
     const sunlight = json.sunlight;
 
-    // Show element
-    // document.querySelector(`[blockID= "${x}"]`).style.display = "block";
-    // // Add details and show
-    document.querySelector(`[commonName= "${x}"]`).append(common_name);
-    document.querySelector(`[scientific= "${x}"]`).append(scientific_name);
-    document.querySelector(`[sunlight= "${x}"]`).append(sunlight);
-    document.querySelector(`[watering= "${x}"]`).append(watering);
-    document.querySelector(`[propagation= "${x}"]`).append(propagation);
+    // Clear innerHTML if it is already there
+    document.querySelector(`[commonName= "${id}"]`).innerHTML = '';
+    document.querySelector(`[scientific= "${id}"]`).innerHTML = '';
+    document.querySelector(`[sunlight= "${id}"]`).innerHTML = '';
+    document.querySelector(`[watering= "${id}"]`).innerHTML = '';
+    document.querySelector(`[propagation= "${id}"]`).innerHTML = '';
+    //--------------------------------------------------------------------
+    // Add details and show
+    document.querySelector(`[commonName= "${id}"]`).append(common_name);
+    document.querySelector(`[scientific= "${id}"]`).append(scientific_name);
+    document.querySelector(`[sunlight= "${id}"]`).append(sunlight);
+    document.querySelector(`[watering= "${id}"]`).append(watering);
+    document.querySelector(`[propagation= "${id}"]`).append(propagation);
+
+    async function showInfo() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("info").style.display = "block";
+    }
+
 }
-async function showInfo() {
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("info").style.display = "block";
-}
+
 
 async function addPlant() {
     let plantID = document.getElementById("plantId");
     let plantName = document.getElementById("plantInput");
+    let status = document.getElementById("status");
+    console.log(status.value);
     let parsed = parseInt(plantID.value);
     let nameParse = toString(plantName.value);
+    let statusParse = toString(status.value);
 
     // Alert box
     if (plantID.value == "" || plantName.value == "") {
@@ -64,7 +77,8 @@ async function addPlant() {
             },
             body: JSON.stringify({
                 plantId: parsed,
-                plantName: plantName.value
+                plantName: plantName.value,
+                status: status.value
             })
         };
         const response = await fetch(url, options);
@@ -94,8 +108,8 @@ async function removePlant() {
     }
 }
 
-async function water(){
-    const today = new Date();
+async function water() {
+    const today = new Date().toLocaleDateString();
     // alert(today);
 
     id = document.querySelector('#toWater').dataset.water;
@@ -120,23 +134,17 @@ async function water(){
 }
 
 
-async function graveyard(){
-    alert('heello');
-    id = document.querySelector('#graveyard').dataset.graveyard;
-    console.log("Plant ID to water: " + document.querySelector('#graveyard').dataset.graveyard);
+async function test_loader(){
+    const x = document.querySelector('#loader').dataset.loader;
 
-    const url = 'http://localhost:3001/api/graveyard';
-    const options = {
-        method: 'PUT',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-            plantId: id
-        })
-    };
-    const response = await fetch(url, options);
-    if (response.ok) {
-        location.reload();
+    console.log("ugh :" + x);
+    var myVar;
+    myVar = setTimeout(showInfo, 1000);
+    document.getElementById("loader").style.display = "block";
+
+    async function showInfo() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("info").style.display = "block";
     }
 }
+

@@ -3,25 +3,24 @@ body {
     font-family: 'Quicksand';
 }
 
+.searchBar {
+    width: 50%;
+}
+
 .card {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-nav {
+/*.col{*/
+/*    width: 10%;*/
+/*}*/
 
+nav {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 button {
     white-space: nowrap;
-}
-
-/*.fa-droplet{*/
-/*    color: lightseagreen;*/
-/*}*/
-
-.col {
-    width: 20%;
 }
 
 #overlay {
@@ -202,7 +201,7 @@ body {
 
 
 #commonName, #scientific, #sunlight, #watering, #propagation {
-    border-top: 2px black double;
+    border-bottom: 2px black double;
 }
 
 #theButton {
@@ -213,17 +212,71 @@ body {
     font-family: 'Quicksand';
 }
 
-#spriteContainer{
+#spriteContainer {
     width: 300px;
+    /*position: absolute;*/
+    /*bottom: 0;*/
     height: 300px;
     display: block;
-    background-image: url("../images/sprite2.png");
-    animation: sprite 3s steps(6) infinite;
+    background-image: url("../images/plant (1).png");
+    animation: sprite 3s steps(7) infinite;
+    transform: scale(0.5);
 }
 
 @keyframes sprite {
     100% {
-        background-position: -1800px;
+        background-position: -2100px;
     }
 }
 
+#empty{
+    width: 500px;
+    height: 500px;
+    display: block;
+    background-image: url("../images/New Piskel (5).png");
+    animation: sprite1 1.5s steps(2) infinite;
+}
+@keyframes sprite1 {
+    100% {
+        background-position: -1000px;
+    }
+}
+
+#add {
+    white-space: nowrap;
+}
+
+#theButton {
+    background: #FF4742;
+    border: 1px solid #FF4742;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    outline: 0;
+    padding: 7px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+#theButton:hover,
+#theButton:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #FF4742;
+}
+
+#theButton:active {
+    opacity: .5;
+}
+
+li{
+    margin-top: 10px;
+}

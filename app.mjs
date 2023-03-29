@@ -3,6 +3,7 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 import cors from 'cors';
 import multer from 'multer';
+import {list_plants} from "./controllers/plants.mjs";
 
 const app = express();
 
@@ -28,20 +29,27 @@ app.get('/', async (req, res) => {
     res.status(200).render('home');
 });
 
-
 app.get('/nursery', async (req, res) => {
-    const url = 'http://localhost:3001/api/nursery';
+    const url = 'http://localhost:3001/api/plants';
+
+    const data = await list_plants();
+    JSON.stringify(data);
+
     const response = await fetch(url);
     const json = await response.json();
 
     res.locals.plants = json;
+    res.locals.data = data;
+
     console.log(res.locals);
+
+    // console.log("data: " + data);
 
     res.status(200).render('nursery');
 });
 
 app.get('/graveyard', async (req, res) => {
-    const url = 'http://localhost:3001/api/graveyard';
+    const url = 'http://localhost:3001/api/plants';
     const response = await fetch(url);
     const json = await response.json();
 
@@ -93,5 +101,7 @@ app.post('/nursery', upload.single('profile-file', 'picname'), async function (r
     console.log(res.locals);
     res.status(200).render('nursery');
 })
+
+
 
 export {app}
