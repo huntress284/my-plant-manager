@@ -6,9 +6,7 @@ async function get_info(id, x) {
 
     var myVar;
     myVar = setTimeout(showInfo, 1000);
-    document.getElementById("loader").style.display = "block";
-
-
+    document.querySelector(`[loader= "${id}"]`).style.display = "block";
 
     // PLANT DETAILS
     const url = "https://perenual.com/api/species/details/" + x + "?key=sk-8k2463e99f604d8a438";
@@ -43,9 +41,11 @@ async function get_info(id, x) {
     document.querySelector(`[watering= "${id}"]`).append(watering);
     document.querySelector(`[propagation= "${id}"]`).append(propagation);
 
+    document.querySelector(`[info= "${id}"]`).style.display = "block";
+
     async function showInfo() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("info").style.display = "block";
+        document.querySelector(`[loader= "${id}"]`).style.display = "none";
+        document.querySelector(`[info= "${id}"]`).style.display = "block";
     }
 
 }
@@ -64,21 +64,15 @@ async function addPlant() {
     if (plantID.value == "" || plantName.value == "") {
         alert("Ensure you input a value in both fields!");
     } else {
-        console.log(
-            `plantID : ${plantID.value}, name: ${plantName.value}`
-        );
+        console.log(`plantID : ${plantID.value}, name: ${plantName.value}`);
         console.log(typeof nameParse);
         // Adds plant to DB with ID and PlantName
         const url = 'http://localhost:3001/api/plants';
         const options = {
-            method: 'POST',
-            headers: {
+            method: 'POST', headers: {
                 'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                plantId: parsed,
-                plantName: plantName.value,
-                status: status.value
+            }, body: JSON.stringify({
+                plantId: parsed, plantName: plantName.value, status: status.value
             })
         };
         const response = await fetch(url, options);
@@ -94,11 +88,9 @@ async function removePlant() {
     console.log("Plant ID to delete: " + document.querySelector('#toDelete').dataset.uuid);
     const url = 'http://localhost:3001/api/plants';
     const options = {
-        method: 'DELETE',
-        headers: {
+        method: 'DELETE', headers: {
             'content-type': 'application/json'
-        },
-        body: JSON.stringify({
+        }, body: JSON.stringify({
             plantId: id
         })
     };
@@ -108,22 +100,17 @@ async function removePlant() {
     }
 }
 
-async function water() {
-    const today = new Date().toLocaleDateString();
-    // alert(today);
+async function water(id) {
 
-    id = document.querySelector('#toWater').dataset.water;
-    console.log("Plant ID to water: " + document.querySelector('#toWater').dataset.water);
+    console.log("Plant ID to water: " + id);
+    const today = new Date().toLocaleDateString();
 
     const url = 'http://localhost:3001/api/plants:id';
     const options = {
-        method: 'PUT',
-        headers: {
+        method: 'PUT', headers: {
             'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-            plantId: id,
-            plantName: today
+        }, body: JSON.stringify({
+            plantId: id, plantName: today
         })
     };
     const response = await fetch(url, options);
@@ -134,17 +121,139 @@ async function water() {
 }
 
 
-async function test_loader(){
-    const x = document.querySelector('#loader').dataset.loader;
-
-    console.log("ugh :" + x);
+async function test_loader(x) {
+    console.log("loader id :" + x);
     var myVar;
     myVar = setTimeout(showInfo, 1000);
-    document.getElementById("loader").style.display = "block";
+    document.querySelector(`[loader= "${x}"]`).style.display = "block";
+}
 
-    async function showInfo() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("info").style.display = "block";
+
+async function filter(x) {
+
+    console.log(x)
+
+
+    if (x === 'asc') {
+        const selector = element => element.querySelector('#plant-name').innerText;
+
+        const ascendingOrder = true;
+
+        const isNumeric = false;
+
+        const elements = [...document.querySelectorAll('.col')];
+
+        const parentElement = elements[0].parentNode;
+
+        const collator = new Intl.Collator(undefined, {numeric: isNumeric, sensitivity: 'base'});
+
+        elements
+            .sort((elementA, elementB) => {
+                const [firstElement, secondElement] = ascendingOrder ? [elementA, elementB] : [elementB, elementA];
+                const textOfFirstElement = selector(firstElement);
+                const textOfSecondElement = selector(secondElement);
+                return collator.compare(textOfFirstElement, textOfSecondElement)
+            })
+            .forEach(element => parentElement.appendChild(element));
+        console.log('Sorted A-Z')
+    } else if (x === 'desc') {
+        const selector = element => element.querySelector('#plant-name').innerText;
+
+        const ascendingOrder = false;
+
+        const isNumeric = false;
+
+        const elements = [...document.querySelectorAll('.col')];
+
+        const parentElement = elements[0].parentNode;
+
+        const collator = new Intl.Collator(undefined, {numeric: isNumeric, sensitivity: 'base'});
+
+        elements
+            .sort((elementA, elementB) => {
+                const [firstElement, secondElement] = ascendingOrder ? [elementA, elementB] : [elementB, elementA];
+                const textOfFirstElement = selector(firstElement);
+                const textOfSecondElement = selector(secondElement);
+                return collator.compare(textOfFirstElement, textOfSecondElement)
+            })
+            .forEach(element => parentElement.appendChild(element));
+        console.log('Sorted Z-A')
     }
 }
+
+async function check_water() {
+    // alert('checking last waters...');
+    console.log('loaded script');
+
+    const url = 'http://localhost:3001/api/plants';
+    const options = {
+        method: 'GET'
+    };
+    const response = await fetch(url, options);
+    if (!response.ok) {
+        console.log(response.status);
+    }
+    const json = await response.json();
+
+    console.log(json);
+
+    const today = new Date().toISOString().slice(0, 10);
+
+
+    for (let i = 0; i < json.length; i++) {
+
+        // console.log("loop: " + json[i][3]);
+        console.log(json[i][0]);
+
+        if (json[i][3] === today) {
+            // console.log('you watered today!');
+            // document.querySelector(`[water-time= "${json[i][0]}"]`).innerText = 'You watered today!';
+
+
+
+            console.log("if today: " + json[i][0]);
+            document.querySelector(`[water-alert= "${json[i][0]}"]`).classList.add('alert-primary');
+            document.querySelector(`[water-alert= "${json[i][0]}"]`).prepend('Watered Today!')
+            document.querySelector(`[water-last= "${json[i][0]}"]`).style.display = "block";
+
+        }
+
+        else if(json[i][3] === null){
+            // document.querySelector(`[water-time= "${json[i][0]}"]`).innerText = 'Never watered!';
+            // console.log("if null: " + json[i][0]);
+
+
+            // document.querySelector(`[water-alert= "${json[i][0]}"]`).classList.add('alert-secondary');
+            // document.querySelector(`[water-last= "${json[i][0]}"]`).style.display = "block";
+
+        }
+
+        else {
+            var date1 = new Date(json[i][3]);
+            var date2 = new Date(today);
+            var Difference_In_Time = date2.getTime() - date1.getTime();
+            // To calculate the no. of days between two dates
+            var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24)
+            //To display the final no. of days (result)
+            console.log("Total number of days between dates"
+                + date1 + "and"
+                + date2 + "is:"
+                + Difference_In_Days);
+
+
+            document.querySelector(`[water-time= "${json[i][0]}"]`).innerText = "It has been " + Difference_In_Time + "days since last water";
+
+            document.querySelector(`[water-alert= "${json[i][0]}"]`).classList.add('alert-danger');
+
+            document.querySelector(`[water-last= "${json[i][0]}"]`).style.display = "block";
+
+        }
+    }
+
+}
+
+
+
+
+
 
