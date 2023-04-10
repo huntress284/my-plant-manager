@@ -3,7 +3,6 @@ async function searchPlant() {
     document.getElementById('demo').innerText = '';
     document.getElementById('noneReturned').innerText = '';
 
-
     var x = document.getElementById("mySearch").value;
     // console.log("search value: " + x);
 
@@ -11,16 +10,22 @@ async function searchPlant() {
     const options = {
         method: 'GET'
     };
+
     const response = await fetch(url, options);
     const json = await response.json();
 
     // console.log("Total plants returned: " + json.total);
     document.getElementById('total').innerHTML = "Plants: " + json.total;
 
-    if (json.total == 0) {
+    if (json.total === 0) {
         console.log("Not in the API :(");
         const none = document.getElementById('noneReturned');
         none.innerText = "Plant isn't in API, add new here." + "\n";
+
+        var x = document.createElement('BUTTON');
+
+
+
     }
 
     // TODO: fix layout
@@ -45,20 +50,18 @@ async function searchPlant() {
         const buttons = document.getElementsByTagName('button');
         const result = document.getElementById('result');
 
+
         const buttonPressed = e => {
+
             console.log(e.target.dataset);
 
             document.getElementById('plantId').setAttribute('value', e.target.dataset.id);
             document.getElementById('plantId').setAttribute('disabled', 'true');
             // document.getElementById('plantInput').setAttribute('value', e.target.dataset.id);
-
         }
 
         for (let button of buttons) {
             button.addEventListener("click", buttonPressed);
         }
-
-
     }
-
 }

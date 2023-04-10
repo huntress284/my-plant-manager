@@ -4,6 +4,7 @@ import {fileURLToPath} from 'url';
 import cors from 'cors';
 import multer from 'multer';
 import {list_plants} from "./controllers/plants.mjs";
+import {plants} from "./routes/plants.mjs";
 
 const app = express();
 
@@ -24,7 +25,10 @@ app.get('/', async (req, res) => {
     const json = await response.json();
 
     res.locals.plants = json;
+
     console.log(res.locals);
+
+
     // console.log(json);
     res.status(200).render('home');
 });
@@ -42,8 +46,6 @@ app.get('/nursery', async (req, res) => {
     res.locals.data = data;
 
     console.log(res.locals);
-
-    // console.log("data: " + data);
 
     res.status(200).render('nursery');
 });
