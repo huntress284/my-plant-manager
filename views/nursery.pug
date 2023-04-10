@@ -63,7 +63,7 @@ include default
                             hr
                             .d-flex.flex-column
                                 //button.btn.btn-outline-secondary.my-1#toDelete(data-uuid= `${baby[0]}` onclick= `removeBaby()`) Delete Plant
-                                button.btn.btn-outline-secondary.my-1#toWater(data-water= `${plant[0]}` onclick= `water()`) Water! &nbsp;
+                                button.btn.btn-outline-secondary.my-1#toWater(data-water= `${plant[0]}` onclick= `water(this.getAttribute('data-water'))`) Water! &nbsp;
                                     i.fa-solid.fa-droplet
                                 .dropdown
                                     a.btn.btn-outline-secondary.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
