@@ -40,12 +40,12 @@ export async function update_status(plantId, status) {
 
 }
 
-export async function update_plant(plantId, plantName) {
+export async function update_plant(plantId) {
 
     const session = await mysqlx.getSession(config);
     console.log("plant to water: " + plantId);
-    console.log("date: " + plantName);
-    await session.sql('CALL water_plant(?,?);').bind(plantId, plantName).execute();
+    // console.log("date: " + plantName);
+    await session.sql('CALL water_plant(?);').bind(plantId).execute();
     session.close();
 
 }

@@ -29,7 +29,7 @@ router.route('/plants')
 
 router.route('/plants:id')
 	.put(async (req, res) => {
-		const data = await update_plant(req.body.plantId, req.body.plantName);
+		const data = await update_plant(req.body.plantId);
 		res.status(201).end();
 	});
 
