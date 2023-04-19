@@ -19,6 +19,7 @@ const __dirname = path.dirname(__filename);
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
+
 app.get('/', async (req, res) => {
     const url = 'http://localhost:3001/api/plants';
     const response = await fetch(url);
@@ -28,10 +29,10 @@ app.get('/', async (req, res) => {
 
     console.log(res.locals);
 
-
     // console.log(json);
     res.status(200).render('home');
 });
+
 
 app.get('/nursery', async (req, res) => {
     const url = 'http://localhost:3001/api/plants';
@@ -49,6 +50,7 @@ app.get('/nursery', async (req, res) => {
 
     res.status(200).render('nursery');
 });
+
 
 app.get('/graveyard', async (req, res) => {
     const url = 'http://localhost:3001/api/plants';
@@ -81,16 +83,18 @@ app.use('/uploads', express.static('uploads'));
 app.post('/', upload.single('profile-file', 'picname'), async function (req, res, next) {
     // req.file is the `profile-file` file
     // req.body will hold the text fields, if there were any
-    console.log(JSON.stringify(req.body.picname))
-    console.log(JSON.stringify(req.file))
+    console.log("the rename name" + JSON.stringify(req.body.picname))
+    console.log("file" + JSON.stringify(req.file))
 
     const url = 'http://localhost:3001/api/plants';
     const response = await fetch(url);
     const json = await response.json();
     res.locals.plants = json;
     console.log(res.locals);
-    res.status(200).render('home');
+    // res.status(200).render('home');
+    res.redirect(303, '/');
 })
+
 app.post('/nursery', upload.single('profile-file', 'picname'), async function (req, res, next) {
     // req.file is the `profile-file` file
     // req.body will hold the text fields, if there were any
@@ -103,7 +107,6 @@ app.post('/nursery', upload.single('profile-file', 'picname'), async function (r
     console.log(res.locals);
     res.status(200).render('nursery');
 })
-
 
 
 export {app}
