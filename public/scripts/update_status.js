@@ -41,3 +41,8 @@ async function greenhouse(x){
     }
 }
 
+async function rename_plant(){
+    alert('renaming...')
+
+
+}
