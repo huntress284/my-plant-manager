@@ -4,59 +4,21 @@ include default
     link(rel='stylesheet' type="text/css" href='/static/css/nursery.css')
 
     h1.nursery The Nursery
-    //button.btn.btn-outline-secondary(data-bs-toggle='modal', data-bs-target='#exampleModal', onclick="addPlant()") Add Baby
 
-    //.d-flex.searchBar.my-2
-    //    label.form-label#add.mx-2(for='mySearch') Add Baby
-    //    input#mySearch.form-control.me-2(type='search', placeholder='Search', aria-label='Search')
-    //    button.btn.btn-outline-secondary(onclick='searchPlant()') Search!
-
-    //h4#total.my-4
-    //
-    //#noneReturned
-    //
-    //ul#demo.my-2
     hr
 
-    #exampleModal.modal.fade(tabindex='-1', aria-labelledby='exampleModalLabel', aria-hidden='true')
-        .modal-dialog
-            .modal-content
-                .modal-header
-                    h1#exampleModalLabel.modal-title.fs-5 Add New Plant
-                    button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-                .modal-body
-                    form#form1
-                        .mb-3
-                            label.form-label(for='plantId') Plant ID
-                            input#plantId.form-control(type='text', aria-describedby='plantName', placeholder='Plant ID')
-                        .mb-3
-                            label.form-label(for='plantInput') Plant Name
-                            input#plantInput.form-control(type='text', placeholder='Plant Name')
-                    form#form2(method='POST', action='/nursery', enctype='multipart/form-data')
-                        .mb-3
-                            label.form-label(for='photo') Again..
-                            input#photo(type='text', name='picname', required='')
-                        .mb-3
-                            label Upload profile picture
-                            input(type='file', name='profile-file', required='')
-                .modal-footer
-                    button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
-                    button.btn#theButton(type='button', onclick="addBaby()") Save changes
-
-    //p=data.length
     .row.row-cols-1.row-cols-md-3.g-4
         each plant of plants
             if plant[4] === 'baby'
                 .col
                     .card
                         img.card-img-top(src='/static/images/' + plant[2] + '.jpg', alt=plant[2])
+                        hr
                         .card-body
                             h5.card-title= plant[2]
                             .card-text
-                                //.d-flex.flex-row
                                 lead= plant[5]
                                     i.fa-solid.fa-cake-candles.mx-1
-                                //lead Last Water
                                 .lead Last Water&nbsp
                                     i.fa-solid.fa-droplet
                                 p= plant[3]
@@ -70,11 +32,11 @@ include default
                                         | More
                                     ul.dropdown-menu
                                         li
-                                            a.dropdown-item#greenhouse(data-greenhouse= `${plant[0]}` href='#' onclick= `greenhouse()` ) Move to Greenhouse &nbsp
+                                            a.dropdown-item#greenhouse(data-greenhouse= `${plant[0]}` href='#' onclick= `greenhouse(this.getAttribute('data-greenhouse'))` ) Move to Greenhouse &nbsp
                                                 i.fa-solid.fa-house
                                         li
-                                            a.dropdown-item#graveyard(data-graveyard= `${plant[0]}` href='#' onclick= `graveyard()`) Move to Graveyard &nbsp
+                                            a.dropdown-item#graveyard(data-graveyard= `${plant[0]}` href='#' onclick= `graveyard(this.getAttribute('data-graveyard'))`) Move to Graveyard &nbsp
                                                 i.fa-solid.fa-plant-wilt
                                         li
-                                            a.dropdown-item#toDelete(href='#' data-uuid= `${plant[0]}` onclick= `removePlant()`) Delete Plant &nbsp
+                                            a.dropdown-item#toDelete(href='#' data-uuid= `${plant[0]}` onclick= `removePlant(this.getAttribute('data-uuid'))`) Delete Plant &nbsp
                                                 .fa-solid.fa-circle-xmark
