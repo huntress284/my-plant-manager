@@ -17,14 +17,22 @@ async function searchPlant() {
     // console.log("Total plants returned: " + json.total);
     document.getElementById('total').innerHTML = "Plants: " + json.total;
 
+
+    // TODO: logic for if the plant isn't listed
     if (json.total === 0) {
+
         console.log("Not in the API :(");
         const none = document.getElementById('noneReturned');
-        none.innerText = "Plant isn't in API, add new here." + "\n";
+        none.innerText = "Plant isn't in API? add new here." + "\n";
 
-        var x = document.createElement('BUTTON');
+        let noAPI = document.getElementById("noAPI").style.display = 'block';
+
+        document.getElementById("noAPI").setAttribute('data-bs-toggle', 'modal');
+        document.getElementById("noAPI").setAttribute('data-bs-target', '#exampleModal1');
 
 
+        document.getElementById('plantId1').setAttribute('value', null);
+        document.getElementById('plantId1').setAttribute('disabled', 'true');
 
     }
 

@@ -1,8 +1,8 @@
-async function graveyard(){
+async function graveyard(x){
     alert('Moving to graveyard.');
-    id = document.querySelector('#graveyard').dataset.graveyard;
+    // id = document.querySelector('#graveyard').dataset.graveyard;
 
-    console.log("Plant ID dead: " + document.querySelector('#graveyard').dataset.graveyard);
+    console.log("Plant ID dead: " + x);
 
     const url = 'http://localhost:3001/api/plants';
     const options = {
@@ -11,7 +11,7 @@ async function graveyard(){
             'content-type': 'application/json'
         },
         body: JSON.stringify({
-            plantId: id,
+            plantId: x,
             status: 'dead'
         })
     };
@@ -21,11 +21,8 @@ async function graveyard(){
     }
 }
 
-async function greenhouse(){
-    alert('Moving to greenhouse!');
-    id = document.querySelector('#greenhouse').dataset.greenhouse;
-
-    console.log("Greenhouse ID: " + document.querySelector('#greenhouse').dataset.graveyard);
+async function greenhouse(x){
+    console.log("Greenhouse ID: " + x);
 
     const url = 'http://localhost:3001/api/plants';
     const options = {
@@ -34,7 +31,7 @@ async function greenhouse(){
             'content-type': 'application/json'
         },
         body: JSON.stringify({
-            plantId: id,
+            plantId: x,
             status: 'adult'
         })
     };
