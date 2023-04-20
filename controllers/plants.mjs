@@ -59,15 +59,25 @@ export async function add_note(plantId, note) {
 
 }
 
-export async function update_plant(plantId) {
+export async function water_plant(plantId, date) {
 
     const session = await mysqlx.getSession(config);
     console.log("plant to water: " + plantId);
     // console.log("date: " + plantName);
-    await session.sql('CALL water_plant(?);').bind(plantId).execute();
+    await session.sql('CALL water_plant(?,?);').bind(plantId, date).execute();
     session.close();
 
 }
+export async function rename_plant(plantId, name) {
+
+    const session = await mysqlx.getSession(config);
+    console.log("plant to rename: " + plantId);
+    console.log("new name: " + name);
+    await session.sql('CALL rename_plant(?,?);').bind(plantId, name).execute();
+    session.close();
+
+}
+
 
 
 export async function delete_plant(plantId) {

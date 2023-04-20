@@ -54,10 +54,10 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE `water_plant`(IN pid BIGINT)
+CREATE PROCEDURE `water_plant`(IN pid BIGINT, IN theDate VARCHAR(64))
 BEGIN
 	UPDATE `plants`
-    SET `last_water` = curdate()
+    SET `last_water` = `theDate`
     WHERE `uuid` = pid;
 END$$
 DELIMITER ;
@@ -79,5 +79,14 @@ BEGIN
     FROM `plants`
     WHERE `uuid` = pid;
 
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE `rename_plant`(IN pid BIGINT, IN newName VARCHAR(64))
+BEGIN
+	UPDATE `plants`
+    SET `name` = `newName`
+    WHERE `uuid` = `pid`;
 END //
 DELIMITER ;

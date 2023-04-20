@@ -1,6 +1,6 @@
 import express from 'express';
 
-import {list_plants, create_plant, update_status, update_plant, delete_plant, add_note, get_note}
+import {list_plants, create_plant, update_status, water_plant, delete_plant, add_note, rename_plant}
     from "../controllers/plants.mjs";
 
 const router = express.Router();
@@ -28,7 +28,13 @@ router.route('/plants')
 
 router.route('/plants:id')
     .put(async (req, res) => {
-        const data = await update_plant(req.body.plantId);
+        const data = await water_plant(req.body.plantId, req.body.date);
+        res.status(201).end();
+    });
+
+router.route('/plants/names:id')
+    .put(async (req, res) => {
+        const data = await rename_plant(req.body.plantId, req.body.name);
         res.status(201).end();
     });
 
