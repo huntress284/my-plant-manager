@@ -10,14 +10,14 @@ html
         script(src='/static/scripts/script.js')
         script(src='/static/scripts/search.js')
         script(src='/static/scripts/update_status.js')
-        script(src='/static/scripts/add_plants.js')
+        script(src='/static/scripts/add_plant.js')
         script(src='/static/scripts/filter.js')
         script(src='/static/scripts/notes.js')
         script(src='/static/scripts/watering.js')
 
-        link(rel='stylesheet' type="text/css" href='/static/css/style.css')
-        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Quicksand')
 
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Quicksand')
+        link(rel='stylesheet' type="text/css" href='/static/css/style.css')
         include includes/navbar
 
     body(onload=`check_water()`)
