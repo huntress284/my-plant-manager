@@ -17,14 +17,15 @@ CREATE TABLE plants (
   `name` VARCHAR(64) NOT NULL,
   `last_water` VARCHAR(64),
   `status` VARCHAR(64),
-  `birthday` VARCHAR(64)
+  `birthday` VARCHAR(64),
+  `notes` TINYTEXT
 );
 
 DELIMITER $$
 CREATE PROCEDURE `create_plant`(IN pid INT, IN cname VARCHAR(64), IN pstatus VARCHAR(64))
 BEGIN
   INSERT INTO `plants` (`uuid`, `id`, `name`, `last_water`, `status`,`birthday`)
-	VALUES (uuid_short(),`pid`, `cname`, '2023-04-09', `pstatus`, curdate());
+	VALUES (uuid_short(),`pid`, `cname`, null , `pstatus`, curdate());
 END$$
 DELIMITER ;
 
@@ -39,7 +40,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE `list_plants`()
 BEGIN
-  SELECT `uuid`, `id`, `name`, `last_water`, `status`, `birthday` FROM `plants`;
+  SELECT `uuid`, `id`, `name`, `last_water`, `status`, `birthday`, `notes` FROM `plants`;
 END$$
 DELIMITER ;
 
@@ -61,12 +62,22 @@ BEGIN
 END$$
 DELIMITER ;
 
-DELIMITER $$
-CREATE PROCEDURE `asc`(IN sort INT)
+DELIMITER // 
+CREATE PROCEDURE `add_note`(IN pid BIGINT, IN note TINYTEXT)
 BEGIN
- SELECT * FROM `plants`
- ORDER BY
- CASE WHEN @Direction = 1 THEN -`sort` else `sort` END asc;
-  SELECT `uuid`, `id`, `name`, `last_water`, `status`, `birthday` FROM `plants`;
-END$$
+	UPDATE `plants`
+    SET `notes` = `note`
+    WHERE `uuid` = pid;
+
+END //
+DELIMITER ;
+
+DELIMITER // 
+CREATE PROCEDURE `get_note`(IN pid BIGINT)
+BEGIN
+	SELECT `notes`
+    FROM `plants`
+    WHERE `uuid` = pid;
+
+END //
 DELIMITER ;
