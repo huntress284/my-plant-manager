@@ -10,7 +10,6 @@ block content
     //    .cloud.x4
     //    .cloud.x5
 
-    //button(data-bs-toggle='modal', data-bs-target='#exampleModal', onclick="addPlant()") Create new plant
     .d-flex.searchBar.my-2.align-items-center
         label.form-label#add(for='mySearch').mx-2 Add Plant
         input#mySearch.form-control.me-2(autocomplete='off' type='search', placeholder='Search', aria-label='Search')
@@ -62,10 +61,6 @@ block content
                     button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
                     button.btn.btn-primary(type='button', onclick="addPlant()") Save changes
 
-
-
-
-
     // Modal for no API
     #exampleModal1.modal.fade(tabindex='-1', aria-labelledby='exampleModalLabel', aria-hidden='true')
         .modal-dialog
@@ -76,8 +71,8 @@ block content
                 .modal-body
                     form#form11
                         .mb-3
-                            label.form-label(for='plantId1') Plant ID
-                            input#plantId1.form-control(autocomplete='off' type='text' placeholder='Plant Name' name='picname1')
+                            //label.form-label(for='plantId1') Plant ID
+                            input#plantId1.form-control(autocomplete='off' type='text' placeholder='Plant Name' name='picname1' hidden)
                         .mb-3
                             label.form-label(for='plantInput1') Plant Name
                             input#plantInput1.form-control(autocomplete='off' type='text', placeholder='Plant Name')
@@ -89,8 +84,8 @@ block content
 
                     form#form21(method='POST', action='/', enctype='multipart/form-data')
                         div
-                            label(for= 'replace') name
-                            input.form-control#replace(autocomplete='off', type='text', name='picname', value='', readonly)
+                            //label(for= 'replace') name
+                            input.form-control#replace(autocomplete='off', type='text', name='picname', value='', hidden)
                         div
                             label Upload profile picture
                             input(type='file', name='profile-file')
@@ -100,26 +95,8 @@ block content
                     button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
                     button.btn.btn-primary(type='button', onclick="addNoAPI()") Save changes
 
-    //
-    //#overlay(style="display:none;")
-    //    .window(style='margin: 32px; width: 30vw;')
-    //        .title-bar
-    //            .title-bar-text
-    //                | Error Code 429
-    //            .title-bar-controls
-    //                //button(aria-label='Minimize')
-    //                //button(aria-label='Maximize')
-    //                //button(aria-label='Close')
-    //        .window-body
-    //            img(src='/static/images/confused.jpg')
-    //            h3 Not enough money!
-    //            section.field-row(style='justify-content: flex-end')
-    //                button(onclick="off()") OK
-    //                //button Cancel
-
-    button.btn(onclick= `add_note()`) add note
     .d-flex.justify-content-center
-        .row.row-cols-1.row-cols-md-3.g-4
+        .row.row-cols-1.row-cols-md-4.g-4
             each plant of plants
 
                 if plant[4] === 'adult'
@@ -139,16 +116,9 @@ block content
 
                                 //hr
                                 .card-text
-                                    //#number= plant[2]
                                     .lead Last Water&nbsp
                                         i.fa-solid.fa-droplet
                                     p= plant[3]
-                                    //form
-
-                                    //textarea.form-control(data-noteID= `${plant[0]}`, readonly)= plant[6]
-                                    //button.btn.btn-outline-secondary edit
-                                    //button.btn.btn-outline-secondary(onclick=`add_note(this.getAttribute('data-note'), this.getAttribute('data-hehe'))`, data-note= `${plant[0]}`, data-hehe=`${plant[6]}`) save
-
                                     p#plant-name(style= 'display:none')= plant[2]
 
                                     .spinner-border.text-secondary#loader(loader= `${plant[0]}` role='status' style='display: none;')
@@ -174,9 +144,6 @@ block content
                                 hr
 
                                 .d-flex.flex-column
-                                    //button.btn.btn-outline-secondary.my-1#getInfo(data-info= `${plant[0]}` onclick=`get_info( this.getAttribute('data-info') ,${plant[1]})`) More Info &nbsp
-                                    //    i.fa-solid.fa-magnifying-glass
-
                                     button.btn.btn-outline-secondary.my-1(type='button', data-bs-toggle='collapse', data-bs-target='#' + `${plant[0]}` + 'e', aria-expanded='false', aria-controls='collapseExample')
                                         | See Notes
                                     .collapse(id= `${plant[0]}` + 'e', style='')
@@ -184,8 +151,6 @@ block content
                                             textarea.form-control(data-noteID= `${plant[0]}`)= plant[6]
                                             button.btn.btn-outline-secondary edit
                                             button.btn.btn-outline-secondary(onclick=`add_note(this.getAttribute('data-note'), this.getAttribute('data-hehe'))`, data-note= `${plant[0]}`, data-hehe=`${plant[6]}`) save
-
-
 
                                     button.btn.btn-outline-secondary.my-1(type='button', data-bs-toggle='collapse', data-bs-target= '#' + `${plant[0]}` , aria-expanded='true', aria-controls='collapseExample', fdprocessedid='8jjq6')
                                         | More Info &nbsp;
@@ -208,9 +173,6 @@ block content
 
                                     button.btn.btn-outline-secondary.my-1#toWater(data-water= `${plant[0]}` onclick= `water(this.getAttribute('data-water'))`) Water! &nbsp;
                                         i.fa-solid.fa-droplet
-                                    // Button trigger modal
-                                    //button.btn.btn-outline-secondary(onclick=`add_note(this.getAttribute('data-note'), this.getAttribute('data-hehe'))`, data-note= `${plant[0]}`, data-hehe=`${plant[6]}`, type='button', data-bs-toggle='modal', data-bs-target='#exampleModal11')
-                                    //    | View Notes
 
                                     .dropdown
                                         a.btn.btn-outline-secondary.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
@@ -222,17 +184,3 @@ block content
                                             li
                                                 a.dropdown-item#toDelete(href='#', data-uuid= `${plant[0]}` onclick= `removePlant(this.getAttribute('data-uuid'))`) Delete Plant &nbsp
                                                     i.fa-solid.fa-circle-xmark
-
-                    //#exampleModal11.modal.fade(tabindex='-1', aria-hidden='true')
-                    //    .modal-dialog
-                    //        .modal-content
-                    //            .modal-header
-                    //                h1#exampleModalLabel11.modal-title.fs-5 Modal title
-                    //                button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-                    //            .modal-body
-                    //
-                    //                textarea(data-noteID= `${plant[0]}`)
-                    //                button.btn.btn-outline-secondary(data-note= `${plant[0]}`, onclick=`add_note(this.getAttribute('data-note'))`) update
-                    //            //.modal-footer
-                    //            //    button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
-                    //            //    button.btn.btn-primary(type='button') Save changes
