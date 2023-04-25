@@ -1,0 +1,21 @@
+.d-flex.flex-column
+    button.btn.btn-outline-secondary.my-1(type='button', data-bs-toggle='collapse', data-bs-target= '#' + `${plant[0]}` + "_water", aria-expanded='false', aria-controls='collapseExample')
+        | Water
+    .collapse(id= `${plant[0]}` + "_water")
+        .card.card-body
+            form
+                label.form-label(for='start') Water Date:
+                input.form-control#waterDate(type='date', name='trip-start', min='2023-01-01', max='2025-12-31')
+
+            button.btn.btn-secondary(data-water= `${plant[0]}`, onclick=`water(this.getAttribute('data-water'))`) Update
+
+    .dropdown
+        a.btn.btn-outline-secondary.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+            | More
+        ul.dropdown-menu
+            li
+                a.dropdown-item#graveyard(data-graveyard= `${plant[0]}` href='#' onclick= `graveyard(this.getAttribute('data-graveyard'))`) Move to Graveyard &nbsp
+                    i.fa-solid.fa-plant-wilt
+            li
+                a.dropdown-item#toDelete(href='#', data-uuid= `${plant[0]}` onclick= `removePlant(this.getAttribute('data-uuid'))`) Delete Plant &nbsp
+                    i.fa-solid.fa-circle-xmark
