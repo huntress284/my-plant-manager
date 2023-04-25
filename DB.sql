@@ -90,3 +90,12 @@ BEGIN
     WHERE `uuid` = `pid`;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE `get_indvidual_plant`(IN pid BIGINT)
+BEGIN
+	SELECT `uuid`, `id`, `name`, `last_water`, `status`, `birthday`, `notes` 
+    FROM `plants`
+    WHERE `uuid` = `pid`;
+END //
+DELIMITER ; 
