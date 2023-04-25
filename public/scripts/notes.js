@@ -5,9 +5,10 @@ async function add_note(x, y) {
 
 
 
-    const note = document.querySelector(`[data-noteID= "${x}"]`).value;
+    // const note = document.querySelector(`[data-noteID= "${x}"]`).value;
+    const note = document.getElementById('theNote').value;
     // // note
-    console.log("should be: " + note);
+    // console.log("should be: " + note);
 
     const url = 'http://localhost:3001/api/plants/notes';
     const options = {

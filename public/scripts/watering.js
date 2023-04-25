@@ -2,10 +2,12 @@
 async function water(id) {
 
     console.log("Plant ID to water: " + id);
-    const today = document.getElementById('waterDate').value;
+    // const today = document.getElementById('waterDate').value;
+    const today = document.querySelector(`[water_date= "${id}"]`).value;
+
     console.log(today)
 
-    const url = 'http://localhost:3001/api/plants:id';
+    const url = 'http://localhost:3001/api/plants/water';
     const options = {
         method: 'PUT', headers: {
             'content-type': 'application/json'

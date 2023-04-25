@@ -100,6 +100,12 @@ async function off(x, y) {
     // document.querySelector(`[info= "${x}"]`).style.display = "none";
 }
 
+async function param(data){
+    // alert('hello')
+
+    location.search = new URLSearchParams(data);
+}
+
 
 
 

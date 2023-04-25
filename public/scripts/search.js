@@ -73,3 +73,45 @@ async function searchPlant() {
         }
     }
 }
+
+
+async function searchy(id) {
+
+    console.log("searchy id: " + id)
+
+    const url = "https://perenual.com/api/species/details/" + id + "?key=sk-8k2463e99f604d8a438";
+    const options = {
+        method: 'GET'
+    };
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+        console.log(response.status);
+
+        document.getElementById('commonName1').innerText = 'N/A';
+        document.getElementById('scientific1').innerText = 'N/A';
+        document.getElementById('sunlight1').innerText = 'N/A';
+        document.getElementById('watering1').innerText = 'N/A';
+        document.getElementById('propagation1').innerText = 'N/A';
+
+    } else {
+        const json = await response.json();
+
+        // TODO: array of elements
+        const common_name = json.common_name;
+        const scientific_name = json.scientific_name;
+        const propagation = json.propagation;
+        const watering = json.watering;
+        const sunlight = json.sunlight;
+
+        document.getElementById('commonName1').innerText = common_name;
+        document.getElementById('scientific1').innerText = scientific_name;
+        document.getElementById('sunlight1').innerText = sunlight;
+        document.getElementById('watering1').innerText = watering;
+        document.getElementById('propagation1').innerText = propagation;
+
+
+        console.log("outputs: " + common_name, scientific_name)
+    }
+
+}
