@@ -1,0 +1,52 @@
+extends default
+
+block content
+
+        each plant of plants
+
+            .row.m-0.d-flex.p-4
+                .col-md-4
+
+                    img.plantImage(src='/static/images/' + plant[2] + '.jpg', alt=plant[2], data-info= `${plant[1]}`, onload=`searchy( this.getAttribute('data-info') ,${plant[1]})`)
+                    //p= plant[1]
+                .col-md-8
+                    .display-6= plant[2]
+                    .text-muted#scientific1
+                    hr
+                    dl.row
+                        //dt.col-sm-3 Description lists
+                        //dd.col-sm-9 A description list is perfect for defining terms.
+
+                        dt.col-sm-3 Common Name:
+                        dd.col-sm-9
+                            p#commonName1(name='ege')
+
+                        dt.col-sm-3
+                            .fa-solid.fa-sun &nbsp;
+                            | Sunlight:
+                        dd.col-sm-9
+                            p#sunlight1
+
+                        dt.col-sm-3
+                            .fa-solid.fa-droplet &nbsp;
+                            | Watering:
+                        dd.col-sm-9
+                            p#watering1
+                        dt.col-sm-3
+                            .fa-solid.fa-leaf &nbsp;
+                            | Propagation:
+                            dd.col-sm-9
+                                p#propagation1
+
+                        dt.col-sm-3
+                            .fa-regular.fa-note-sticky &nbsp;
+                            | Notes:
+                            dd.col-sm-9
+                                p
+                                    textarea.form-control#theNote= plant[6]
+                                    //button.btn.btn-outline-secondary edit
+                                    button.btn.btn-outline-secondary.my-1(onclick=`add_note(this.getAttribute('data-note'), this.getAttribute('data-hehe'))`, data-note= `${plant[0]}`, data-hehe=`${plant[6]}`) save
+
+
+
+                            //p And some more placeholder definition text.

@@ -27,12 +27,30 @@ app.get('/', async (req, res) => {
 
     res.locals.plants = json;
 
-    console.log(res.locals);
 
     // console.log(json);
     res.status(200).render('home');
 });
 
+
+app.get('/plants/:id', async (req, res, next) =>{
+
+    const url = `http://localhost:3001/api/plants/${req.params.id}`;
+
+    console.log(url)
+    const response = await fetch(url);
+
+    const json = await response.json();
+
+    // console.log(": " + json)
+    res.locals.plants = json;
+
+    // console.log("name: " + res.locals.name);
+
+
+    res.status(200).render('plant')
+
+})
 
 app.get('/nursery', async (req, res) => {
     const url = 'http://localhost:3001/api/plants';

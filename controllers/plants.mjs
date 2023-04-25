@@ -40,12 +40,26 @@ export async function update_status(plantId, status) {
 
 }
 
-export async function get_note(plantId) {
+// export async function get_note(plantId) {
+//
+//     const session = await mysqlx.getSession(config);
+//     console.log("plant id: " + plantId);
+//     await session.sql('CALL get_note(?);').bind(plantId).execute();
+//     session.close();
+//
+// }
 
-    const session = await mysqlx.getSession(config);
-    console.log("plant id: " + plantId);
-    await session.sql('CALL get_note(?);').bind(plantId).execute();
-    session.close();
+export async function get_individual_plant(plantId) {
+
+    let data;
+    try {
+        const session = await mysqlx.getSession(config);
+        data = await session.sql(`CALL get_individual_plant(?);`).bind(plantId).execute();
+        session.close();
+        return data.fetchAll();
+    } catch (error) {
+        console.error(error);
+    }
 
 }
 
@@ -68,6 +82,7 @@ export async function water_plant(plantId, date) {
     session.close();
 
 }
+
 export async function rename_plant(plantId, name) {
 
     const session = await mysqlx.getSession(config);
@@ -75,7 +90,6 @@ export async function rename_plant(plantId, name) {
     console.log("new name: " + name);
     await session.sql('CALL rename_plant(?,?);').bind(plantId, name).execute();
     session.close();
-
 }
 
 
